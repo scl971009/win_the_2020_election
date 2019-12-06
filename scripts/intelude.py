@@ -16,7 +16,7 @@ story_list = [[[["2002年，政壇失利；11年後，出任北農總經理…�
                 ["歷經韓黑份子、預算卡韓、1450、爵卿等各類黑韓產業鏈的四處抹黑，韓市長用闢眼看著他們，一派輕鬆地將這些假韓粉們一一擊倒。", 
                  "緊接著，摑面黨的2020總統候選人初選即將開始；苦民所苦，睡到中午的韓市長漸漸地，開始想替高雄以外的庶民盡一份心力，整日輾轉反側……"]]]]
 
-def start(character, level, op_ed):
+def start(window_surface, character, level, op_ed):
 	"""
 	show the corresponding interlude
 
@@ -77,4 +77,4 @@ class Intelude():
 
 	def run(self):
 		"""call start with its arguments"""
-		start(self.character, self.level, self.op_ed)
+		start(self.window_surface, self.character, self.level, self.op_ed)
