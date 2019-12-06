@@ -25,7 +25,7 @@ def start(character, level, op_ed):
 		level: which level to show
 		op_ed: show OP or ED
 	"""
-	if op_ed:
+	if not op_ed:
 		print(title_list[character][level])
 		clicked = 0
 		while True:
