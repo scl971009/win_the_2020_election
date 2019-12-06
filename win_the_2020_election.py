@@ -2,6 +2,8 @@ import sys
 import pygame
 from pygame.locals import QUIT
 
+from scripts.intelude import Intelude
+
 def start(window_surface, background):
 	"""
 	main scene
@@ -61,9 +63,10 @@ def choose_player(window_surface, background):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if korean_fish.collidepoint(event.pos):
-						return "korean fish"
+						return 0
 
 def main():
+	"""the main function"""
 	pygame.init()
 	window_surface = pygame.display.set_mode((800, 600))
 	pygame.display.set_caption('2020爭霸戰')
@@ -80,7 +83,8 @@ def main():
 	if button_main == "start":
 		while True:
 			char = choose_player(window_surface, choose_char)
-			print(char)
+			story = Intelude(window_surface, char, 0, 0)
+			story.run()
 
 if __name__ == '__main__':
 	main()
