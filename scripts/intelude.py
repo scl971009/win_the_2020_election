@@ -27,8 +27,8 @@ def start(window_surface, character, level, op_ed):
 	"""
 	if not op_ed:
 		print(title_list[character][level])
-		clicked = 0
-		while True:
+		clicked = False
+		while not clicked:
 			for event in pygame.event.get():
 				if event.type == QUIT:
 					pygame.quit()
@@ -36,15 +36,13 @@ def start(window_surface, character, level, op_ed):
 				elif event.type == pygame.MOUSEBUTTONUP:
 					if event.button == 1:
 						print(story_list[character][level][op_ed][0])
-						clicked = 1
-			if clicked:
-				break
+						clicked = True
 	else:
 		print(story_list[character][level][op_ed][0])
 
 	for line in story_list[character][level][op_ed][1:]:
-		clicked = 0
-		while True:
+		clicked = False
+		while not clicked:
 			for event in pygame.event.get():
 				if event.type == QUIT:
 					pygame.quit()
@@ -52,9 +50,7 @@ def start(window_surface, character, level, op_ed):
 				elif event.type == pygame.MOUSEBUTTONUP:
 					if event.button == 1:
 						print(line)
-						clicked = 1
-			if clicked:
-				break
+						clicked = True
 
 class Intelude():
 	def __init__(self, window_surface, character, level, op_ed):

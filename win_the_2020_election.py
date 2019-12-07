@@ -81,8 +81,8 @@ def main():
 	button_main = start(window_surface, background)
 
 	if button_main == "start":
+		char = choose_player(window_surface, choose_char)
 		while True:
-			char = choose_player(window_surface, choose_char)
 			story = Intelude(window_surface, char, 0, 0)
 			story.run()
 
