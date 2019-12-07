@@ -21,6 +21,7 @@ def start(window_surface, character, level, op_ed):
 	show the corresponding interlude
 
 	arg:
+		window_surface: the window_surface to draw scene
 		character: which character's interlude to show
 		level: which level to show
 		op_ed: show OP or ED
