@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import QUIT
 
 from scripts.intelude import Intelude
+from scripts.stage import Stage
 
 def start(window_surface, background):
 	"""
@@ -82,9 +83,15 @@ def main():
 
 	if button_main == "start":
 		char = choose_player(window_surface, choose_char)
-		while True:
-			story = Intelude(window_surface, char, 0, 0)
+		for i in range(5):
+			story = Intelude(window_surface, char, i, 0)
 			story.run()
+			stage = Stage(window_surface, char, i)
+			stage.run()
+			result = stage.get_result()
+			if not result:
+				#fail
+				break
 
 if __name__ == '__main__':
 	main()
