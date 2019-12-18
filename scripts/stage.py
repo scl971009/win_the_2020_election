@@ -4,6 +4,7 @@ from pygame.locals import *
 from scripts.player import Player
 from scripts.enemy import Enemy
 
+
 def stage00(window_surface):
 	floor = pygame.Rect(0, 560, 800, 40)
 	block1 = pygame.Rect(95, 140, 130, 20)
@@ -21,8 +22,11 @@ def stage00(window_surface):
 				pygame.quit()
 				sys.exit()
 			elif event.type == KEYDOWN:
-				pressed_keys = pygame.key.get_pressed()
-				player.update(pressed_keys)
+				if event.key == K_SPACE:
+					print("space pressed")
+				else:
+					pressed_keys = pygame.key.get_pressed()
+					player.update(pressed_keys)
 
 def start(window_surface, character, level):
 	path = "img\\stage\\stage" + str(character) + str(level) + ".png"
