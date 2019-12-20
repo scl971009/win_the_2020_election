@@ -11,6 +11,7 @@ class Player(pygame.sprite.Sprite):
 		self.surf.fill((0,0,0))
 		self.rect = self.surf.get_rect()
 		self.character = character
+		self.life = 5
 
 	def update(self, pressed_keys):
 		""""""
