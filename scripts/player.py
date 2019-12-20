@@ -19,13 +19,16 @@ class Player(pygame.sprite.Sprite):
 
 	def update(self, pressed_keys):
 		""""""
-		#todo: move when up, left, right is pressed
-		if pressed_keys[K_UP]:
-			print('up pressed')
+		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT]:
 			self.rect.move_ip(-5, 0)
 		if pressed_keys[K_RIGHT]:
 			self.rect.move_ip(5, 0)
+
+	def jump(self):
+		""""""
+		#todo: jump when K_UP is pressed
+		print('jump')
 
 	def get_player_rect(self):
 		return self.rect

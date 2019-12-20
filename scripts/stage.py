@@ -33,7 +33,11 @@ def stage00(window_surface, background):
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
-
+			elif event.type == KEYDOWN:
+				if event.key == K_SPACE:
+					print(player.get_player_rect().x, player.get_player_rect().y)
+				elif event.key == K_UP:
+					player.jump()
 		pressed_keys = pygame.key.get_pressed()
 		player.update(pressed_keys)
 
