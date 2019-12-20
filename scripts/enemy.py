@@ -1,6 +1,6 @@
 import sys
 import pygame
-from pygame.locals import QUIT
+from pygame.locals import *
 
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self, character, level, number):

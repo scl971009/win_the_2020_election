@@ -65,11 +65,11 @@ def choose_player(window_surface, background):
 		background: background image after scaling and convert
 
 	Return Value:
-		0: korean fish is chosen
+		0: korea fish is chosen
 	"""
 	window_surface.blit(background, (0, 0))
 	
-	korean_fish = pygame.Rect(320, 180, 180, 330)
+	korea_fish = pygame.Rect(320, 180, 180, 330)
 
 	pygame.display.update()
 
@@ -80,7 +80,7 @@ def choose_player(window_surface, background):
 				sys.exit()
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
-					if korean_fish.collidepoint(event.pos):
+					if korea_fish.collidepoint(event.pos):
 						return 0
 
 def main():
