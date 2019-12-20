@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
 		self.character = character
 		self.life = 5
 
-	def update(self, pressed_keys):
+	def move_left_right(self, pressed_keys):
 		""""""
 		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT]:

@@ -39,7 +39,7 @@ def stage00(window_surface, background):
 				elif event.key == K_UP:
 					player.jump()
 		pressed_keys = pygame.key.get_pressed()
-		player.update(pressed_keys)
+		player.move_left_right(pressed_keys)
 
 def start(window_surface, character, level):
 	"""
