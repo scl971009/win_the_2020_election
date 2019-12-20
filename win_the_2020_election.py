@@ -47,6 +47,8 @@ def rule(window_surface):
 
 	window_surface.blit(background, (0, 0))
 
+	#back btn
+
 	pygame.display.update()
 
 	while True:

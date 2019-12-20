@@ -4,7 +4,10 @@ from pygame.locals import *
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self, character):
-		""""""
+		"""
+		arg:
+			character: player number (0 for korea fish)
+		"""
 		#todo: change character image to the right character (current: black)
 		super(Player, self).__init__()
 		self.surf = pygame.Surface((60, 90))

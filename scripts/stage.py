@@ -12,6 +12,8 @@ def stage00(window_surface):
 	block3 = pygame.Rect(195, 270, 390, 20)
 	block4 = pygame.Rect(150, 405, 500, 25)
 	player = Player(0)
+	enemy0 = Enemy(0, 0, 0)
+	enemy1 = Enemy(0, 0, 1)
 	window_surface.blit(player.surf, (190, 470))
 
 	pygame.display.update()

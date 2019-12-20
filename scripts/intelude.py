@@ -61,7 +61,7 @@ class Intelude():
 		arg:
 			window_surface: window_surface to draw scene
 			character:
-				0: korean fish's intelude story
+				0: korea fish's intelude story
 			level: which level the player is reading
 			op_ed:
 				0: OP
