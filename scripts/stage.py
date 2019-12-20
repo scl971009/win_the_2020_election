@@ -24,10 +24,10 @@ def stage00(window_surface, background):
 
 	while True:
 		window_surface.blit(background, (0, 0))
-		window_surface.blit(player.surf, player.rect)
+		window_surface.blit(player.get_player_surf(), player.get_player_rect())
 
 		pygame.display.update()
-		if not floor.top == player.rect.bottom:
+		if not floor.top == player.get_player_rect().bottom:
 			print('on floor')
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -35,7 +35,7 @@ def stage00(window_surface, background):
 				sys.exit()
 			elif event.type == KEYDOWN:
 				if event.key == K_SPACE:
-					print(player.rect.x, player.rect.y)
+					print(player.get_player_rect().x, player.get_player_rect().y)
 				else:
 					pressed_keys = pygame.key.get_pressed()
 					player.update(pressed_keys)

@@ -29,3 +29,6 @@ class Player(pygame.sprite.Sprite):
 
 	def get_player_rect(self):
 		return self.rect
+
+	def get_player_surf(self):
+		return self.surf
