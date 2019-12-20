@@ -12,6 +12,13 @@ def stage00(window_surface, background):
 	block2 = pygame.Rect(570, 140, 135, 20)
 	block3 = pygame.Rect(195, 270, 390, 20)
 	block4 = pygame.Rect(150, 405, 500, 25)
+	floor_list = []
+	floor_list.append(floor)
+	floor_list.append(block1)
+	floor_list.append(block2)
+	floor_list.append(block3)
+	floor_list.append(block4)
+
 	player = Player(0, 190, 470)
 	enemy0 = Enemy(0, 0, 0)
 	enemy1 = Enemy(0, 0, 1)
@@ -27,8 +34,7 @@ def stage00(window_surface, background):
 		window_surface.blit(player.get_player_surf(), player.get_player_rect())
 
 		pygame.display.update()
-		if not floor.top == player.get_player_rect().bottom:
-			print('on floor')
+
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				pygame.quit()
@@ -40,6 +46,7 @@ def stage00(window_surface, background):
 					player.jump()
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
+		player.gravity(floor_list)
 
 def start(window_surface, character, level):
 	"""

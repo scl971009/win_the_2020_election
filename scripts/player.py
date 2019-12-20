@@ -16,6 +16,18 @@ class Player(pygame.sprite.Sprite):
 		self.rect = self.surf.get_rect(topleft = (x, y))
 		self.character = character
 		self.life = 5
+		#maybe you will need force and speed as variable... (I'm not sure. It depends on how you implement jump and gravity.)
+
+	def gravity(self, floor_list):
+		"""
+		Simulate gravity.
+
+		arg:
+			floot_list: the list of all floor (rect) in this stage.
+		"""
+		#if not on any floor:
+			#move down (not constant velocity)
+		pass
 
 	def move_left_right(self, pressed_keys):
 		""""""
@@ -27,7 +39,7 @@ class Player(pygame.sprite.Sprite):
 
 	def jump(self):
 		""""""
-		#todo: jump when K_UP is pressed
+		#todo: jump when K_UP is pressed (should not just simply plus y position)
 		print('jump')
 
 	def get_player_rect(self):
