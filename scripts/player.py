@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
 		arg:
 			floot_list: the list of all floor (rect) in this stage.
 		"""
-		#if not on any floor:
+		#if not colliding any floor:
 			#move down (not constant velocity)
 		pass
 
