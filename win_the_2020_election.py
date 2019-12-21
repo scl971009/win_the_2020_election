@@ -41,13 +41,13 @@ def start(window_surface, background):
 
 def rule(window_surface):
 	"""show instruction page"""
-	background = pygame.image.load("img\\else\\rule_HowToPlay.png")
+	background = pygame.image.load("img\\else\\rule.png")
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
 
 	window_surface.blit(background, (0, 0))
 
-	#back btn
+	back_btn = pygame.Rect(575, 460, 75, 70)
 
 	pygame.display.update()
 
@@ -56,6 +56,10 @@ def rule(window_surface):
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					if back_btn.collidepoint(event.pos):
+						return
 
 def choose_player(window_surface, background):
 	"""
