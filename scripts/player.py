@@ -20,13 +20,15 @@ class Player(pygame.sprite.Sprite):
 
 	def gravity(self, floor_list):
 		"""
-		Simulate gravity.
+		This function will be call in the main loop. Simulate gravity when nothing is pressed.
 
 		arg:
 			floot_list: the list of all floor (rect) in this stage.
 		"""
 		#if not colliding any floor:
 			#move down (not constant velocity)
+		#else:
+			#handle collide
 		pass
 
 	def move_left_right(self, pressed_keys):
