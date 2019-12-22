@@ -2,6 +2,8 @@ import sys
 import pygame
 from pygame.locals import *
 
+initial_pos_list = [[]]
+
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self, character, level, number):
 		"""
@@ -15,6 +17,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.surf = pygame.Surface((60, 90))
 		self.surf.fill((0,0,0))
 		self.rect = self.surf.get_rect()
+		#self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
 		self.character = character
 		self.level = level
 		self.number = number

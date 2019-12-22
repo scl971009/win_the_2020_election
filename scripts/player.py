@@ -44,8 +44,8 @@ class Player(pygame.sprite.Sprite):
 		#todo: jump when K_UP is pressed (should not just simply plus y position)
 		print('jump')
 
-	def get_player_rect(self):
+	def get_rect(self):
 		return self.rect
 
-	def get_player_surf(self):
+	def get_surf(self):
 		return self.surf

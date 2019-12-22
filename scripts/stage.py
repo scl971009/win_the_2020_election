@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 from scripts.player import Player
 from scripts.enemy import Enemy
+from scripts.material import Material
 
 
 def stage00(window_surface, background):
@@ -25,13 +26,17 @@ def stage00(window_surface, background):
 	enemy_group = pygame.sprite.Group()
 	enemy_group.add(enemy0)
 	enemy_group.add(enemy1)
-	window_surface.blit(player.surf, (190, 470))
+	material_num = 0
+	material = Material(0, 0, material_num)
+	window_surface.blit(player.get_surf(), player.get_rect())
+	window_surface.blit(material.get_surf(), material.get_rect())
 
 	pygame.display.update()
 
 	while True:
 		window_surface.blit(background, (0, 0))
-		window_surface.blit(player.get_player_surf(), player.get_player_rect())
+		window_surface.blit(player.get_surf(), player.get_rect())
+		window_surface.blit(material.get_surf(), material.get_rect())
 
 		pygame.display.update()
 
@@ -44,6 +49,9 @@ def stage00(window_surface, background):
 					print(player.get_player_rect().x, player.get_player_rect().y)
 				elif event.key == K_UP:
 					player.jump()
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					print(event.pos)
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.gravity(floor_list)
@@ -57,6 +65,7 @@ def start(window_surface, character, level):
 		character: whose stage to generate
 		level: which level of this character's game
 	"""
+	#path = "img\\material\\material_location\\stage1_mateial_location.png"
 	path = "img\\stage\\stage" + str(character) + str(level) + ".png"
 	background = pygame.image.load(path)
 	background = pygame.transform.scale(background, (800, 600))
