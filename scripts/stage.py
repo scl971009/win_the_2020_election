@@ -8,7 +8,7 @@ from scripts.material import Material
 
 def stage00(window_surface, background):
 	"""stage 1 for korea fish"""
-	floor = pygame.Rect(0, 560, 800, 40)
+	floor = pygame.Rect(0, 555, 800, 45)
 	block1 = pygame.Rect(95, 140, 130, 20)
 	block2 = pygame.Rect(570, 140, 135, 20)
 	block3 = pygame.Rect(195, 270, 390, 20)
@@ -20,7 +20,7 @@ def stage00(window_surface, background):
 	floor_list.append(block3)
 	floor_list.append(block4)
 
-	player = Player(0, 190, 470)
+	player = Player(0, 190, 465)
 	enemy0 = Enemy(0, 0, 0)
 	enemy1 = Enemy(0, 0, 1)
 	enemy_group = pygame.sprite.Group()
@@ -66,7 +66,7 @@ def start(window_surface, character, level):
 		level: which level of this character's game
 	"""
 	#path = "img\\material\\material_location\\stage1_mateial_location.png"
-	path = "img\\stage\\stage" + str(character) + str(level) + ".png"
+	path = "img\\stage\\stage" + str(character) + str(level) + "_all.png"
 	background = pygame.image.load(path)
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
