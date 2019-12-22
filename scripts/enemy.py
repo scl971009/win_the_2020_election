@@ -58,16 +58,15 @@ class Enemy(pygame.sprite.Sprite):
 		floor = self.get_floor(floor_list)
 		player_x = player_rect.centerx
 		player_y = player_rect.centery
-
+		move_step = 1  
 		if self.behavior == 0:       # random move
 			local = random.randint(floor.left, floor.right)
 			if local > self.rect.centerx:
-				self.rect.move_ip(+5, 0)
+				self.rect.move_ip(+move_step, 0)
 			elif local < self.rect.centerx:
-				self.rect.move_ip(-5, 0)
+				self.rect.move_ip(-move_step, 0)
 
-		elif self.behavior == 1:      # the rightest to the leftest
-			move_step = 10
+		elif self.behavior == 1:      # the rightest to the leftest			
 			if self.b_move_right:
 				if self.is_out_of_range(move_step, floor):
 					self.b_move_right = False					
@@ -79,7 +78,6 @@ class Enemy(pygame.sprite.Sprite):
 				else:
 					self.rect.move_ip(-move_step, 0)
 		elif self.behavior == 2:     # close to player
-			move_step = 10
 			if self.rect.centerx < player_x:
 				if not self.is_out_of_range(move_step,floor):
 					self.rect.move_ip(move_step, 0)
