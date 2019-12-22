@@ -28,10 +28,6 @@ def stage00(window_surface, background):
 	enemy_group.add(enemy1)
 	material_num = 0
 	material = Material(0, 0, material_num)
-	window_surface.blit(player.get_surf(), player.get_rect())
-	window_surface.blit(material.get_surf(), material.get_rect())
-
-	pygame.display.update()
 
 	while True:
 		window_surface.blit(background, (0, 0))
@@ -72,8 +68,6 @@ def start(window_surface, character, level):
 	background = pygame.image.load(path)
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
-
-	window_surface.blit(background, (0, 0))
 
 	if character == 0:
 		if level == 0:
