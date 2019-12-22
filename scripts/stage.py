@@ -13,8 +13,8 @@ def set_life(num):
 def stage00(window_surface, background, material_amount, player):
 	"""stage 1 for korea fish"""
 	life = set_life(player.get_life())
-
 	player.stage_start()
+
 	floor = pygame.Rect(0, 555, 800, 45)
 	block1 = pygame.Rect(95, 140, 130, 20)
 	block2 = pygame.Rect(570, 140, 135, 20)
@@ -57,7 +57,7 @@ def stage00(window_surface, background, material_amount, player):
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
-					'''
+					
 					if player.get_rect().collidepoint(event.pos):
 						player.life = player.life - 1
 					if material.get_rect().collidepoint(event.pos):
@@ -65,7 +65,7 @@ def stage00(window_surface, background, material_amount, player):
 						if material_num == material_amount:
 							return True
 						material = Material(0, 0, material_num)
-					'''
+					
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.update(floor_list, enemy_group)
@@ -81,6 +81,81 @@ def stage00(window_surface, background, material_amount, player):
 		if player.get_life() == 0:
 			return False
 
+def stage01(window_surface, background, material_amount, player):
+	"""stage 2 for korea fish"""
+	life = set_life(player.get_life())
+	player.stage_start()
+	
+	floor = pygame.Rect(0, 555, 800, 45)
+	block1 = pygame.Rect(115, 120, 85, 30)
+	block2 = pygame.Rect(520, 125, 60, 25)
+	block3 = pygame.Rect(310, 260, 400, 30)
+	block4 = pygame.Rect(120, 390, 160, 30)
+	floor_list = []
+	floor_list.append(floor)
+	floor_list.append(block1)
+	floor_list.append(block2)
+	floor_list.append(block3)
+	floor_list.append(block4)
+	
+	enemy0 = Enemy(0, 1, 0)
+	enemy1 = Enemy(0, 1, 1)
+	enemy2 = Enemy(0, 1, 2)
+	enemy_group = pygame.sprite.Group()
+	enemy_group.add(enemy0)
+	enemy_group.add(enemy1)
+	enemy_group.add(enemy2)
+	
+	material_num = 0
+	material = Material(0, 1, material_num)
+	
+	while True:
+		life = set_life(player.get_life())
+		window_surface.blit(background, (0, 0))
+		window_surface.blit(life, (450, 545))
+		window_surface.blit(player.get_surf(), player.get_rect())
+		window_surface.blit(material.get_surf(), material.get_rect())
+
+		pygame.display.update()
+
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == KEYDOWN:
+				if event.key == K_SPACE:
+					print(player.get_player_rect().x, player.get_player_rect().y)
+				elif event.key == K_UP:
+					player.jump()
+		
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					print(event.pos)
+					
+					if player.get_rect().collidepoint(event.pos):
+						player.life = player.life - 1
+					if material.get_rect().collidepoint(event.pos):
+						material_num = material_num + 1
+						if material_num == material_amount:
+							return True
+						material = Material(0, 1, material_num)
+					
+		pressed_keys = pygame.key.get_pressed()
+		player.move_left_right(pressed_keys)
+		player.update(floor_list, enemy_group)
+		enemy0.update(floor_list, player.get_rect())
+		enemy1.update(floor_list, player.get_rect())
+
+		if pygame.sprite.collide_rect(player, material):
+			material_num = material_num + 1
+			if material_num == material_amount:
+				return True
+			material = Material(0, 1, material_num)
+
+		if player.get_life() == 0:
+			return False
+		
+
 def start(window_surface, character, level, player):
 	"""
 	Determine which stage to run.
@@ -90,7 +165,7 @@ def start(window_surface, character, level, player):
 		character: whose stage to generate
 		level: which level of this character's game
 	"""
-	#path = "img\\material\\material_location\\stage1_mateial_location.png"
+	#path = "img\\material\\material_location\\stage" + str(level + 1) + "_mateial_location.png"
 	path = "img\\stage\\stage" + str(character) + str(level) + "_all.png"
 	background = pygame.image.load(path)
 	background = pygame.transform.scale(background, (800, 600))
@@ -99,6 +174,8 @@ def start(window_surface, character, level, player):
 	if character == 0:
 		if level == 0:
 			result = stage00(window_surface, background, 5, player)
+		elif level == 1:
+			result = stage01(window_surface, background, 4, player)
 	return result
 
 class Stage():

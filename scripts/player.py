@@ -2,7 +2,7 @@ import sys
 import pygame
 from pygame.locals import *
 
-initial_pos_list = [[(190, 465)]]
+initial_pos_list = [[(190, 465), (190, 465)]]
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self, character):
