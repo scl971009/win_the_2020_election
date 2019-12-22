@@ -22,10 +22,6 @@ class Material(pygame.sprite.Sprite):
 		self.level = level
 		self.number = number
 
-	def update(self):
-		""""""
-		#todo : enemy AI (move)
-
 	def get_rect(self):
 		return self.rect
 
