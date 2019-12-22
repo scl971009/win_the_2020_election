@@ -2,7 +2,7 @@ import sys
 import pygame
 from pygame.locals import *
 
-initial_pos_list = [[[(715, 495)]]]
+initial_pos_list = [[[(715, 495), (160, 345), (375, 210), (10, 495), (620, 80)]]]
 
 class Material(pygame.sprite.Sprite):
 	def __init__(self, character, level, number):

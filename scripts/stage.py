@@ -6,7 +6,7 @@ from scripts.enemy import Enemy
 from scripts.material import Material
 
 
-def stage00(window_surface, background):
+def stage00(window_surface, background, material_amount):
 	"""stage 1 for korea fish"""
 	floor = pygame.Rect(0, 555, 800, 45)
 	block1 = pygame.Rect(95, 140, 130, 20)
@@ -45,14 +45,28 @@ def stage00(window_surface, background):
 					print(player.get_player_rect().x, player.get_player_rect().y)
 				elif event.key == K_UP:
 					player.jump()
+'''
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
+					if material.get_rect().collidepoint(event.pos):
+						material_num = material_num + 1
+						if material_num == material_amount:
+							return True
+						material = Material(0, 0, material_num)
+'''
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.gravity(floor_list)
 		enemy0.update(floor_list, player.get_rect())
 		enemy1.update(floor_list, player.get_rect())
+
+		if pygame.sprite.collide_rect(player, material):
+			material_num = material_num + 1
+			if material_num == material_amount:
+				return True
+			material = Material(0, 0, material_num)
+
 
 def start(window_surface, character, level):
 	"""
@@ -71,7 +85,8 @@ def start(window_surface, character, level):
 
 	if character == 0:
 		if level == 0:
-			stage00(window_surface, background)
+			result = stage00(window_surface, background, 5)
+	return result
 
 class Stage():
 	def __init__(self, window_surface, character, level):
