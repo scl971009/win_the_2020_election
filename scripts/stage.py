@@ -18,6 +18,8 @@ def action(character, level, window_surface, player, background, material_num, m
 		window_surface.blit(life, (450, 545))
 		window_surface.blit(player.get_surf(), player.get_rect())
 		window_surface.blit(material.get_surf(), material.get_rect())
+		for ienemy in enemy_group:
+			window_surface.blit(ienemy.surf, ienemy.rect)
 
 		pygame.display.update()
 
@@ -46,8 +48,9 @@ def action(character, level, window_surface, player, background, material_num, m
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.update(floor_list, enemy_group)
-		for enemy in enemy_group:
-			enemy.update(floor_list, player.get_rect())
+		enemy_group.update(floor_list, player.get_rect())
+		#for enemy in enemy_group:
+		#	enemy.update(floor_list, player.get_rect())
 
 		if pygame.sprite.collide_rect(player, material):
 			material_num = material_num + 1
@@ -75,8 +78,8 @@ def stage00(window_surface, background, material_amount, player):
 	floor_list.append(block3)
 	floor_list.append(block4)
 
-	enemy0 = Enemy(0, 0, 0)
-	enemy1 = Enemy(0, 0, 1)
+	enemy0 = Enemy(0, 0, 0, 1)
+	enemy1 = Enemy(0, 0, 1, 2)
 	enemy_group = pygame.sprite.Group()
 	enemy_group.add(enemy0)
 	enemy_group.add(enemy1)
@@ -100,9 +103,9 @@ def stage01(window_surface, background, material_amount, player):
 	floor_list.append(block3)
 	floor_list.append(block4)
 	
-	enemy0 = Enemy(0, 1, 0)
-	enemy1 = Enemy(0, 1, 1)
-	enemy2 = Enemy(0, 1, 2)
+	enemy0 = Enemy(0, 1, 0, 0)
+	enemy1 = Enemy(0, 1, 1, 1)
+	enemy2 = Enemy(0, 1, 2, 2)
 	enemy_group = pygame.sprite.Group()
 	enemy_group.add(enemy0)
 	enemy_group.add(enemy1)
