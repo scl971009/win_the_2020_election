@@ -22,6 +22,12 @@ class Enemy(pygame.sprite.Sprite):
 		self.level = level
 		self.number = number
 
-	def update(self):
-		""""""
+	def update(self, floor_list, player_rect):
+		"""
+		This function will be called in the main loop. Update enemy's behavior.
+
+		arg:
+			floor_list: a list of all floor's rect in this stage
+			player_rect: player's current rect
+		"""
 		#todo : enemy AI (move)
