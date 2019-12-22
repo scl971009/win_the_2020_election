@@ -45,7 +45,7 @@ def stage00(window_surface, background, material_amount):
 					print(player.get_player_rect().x, player.get_player_rect().y)
 				elif event.key == K_UP:
 					player.jump()
-'''
+		'''
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
@@ -54,7 +54,7 @@ def stage00(window_surface, background, material_amount):
 						if material_num == material_amount:
 							return True
 						material = Material(0, 0, material_num)
-'''
+		'''
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.gravity(floor_list)
