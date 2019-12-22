@@ -1,12 +1,11 @@
 import sys
 import pygame
-import random
 from pygame.locals import *
 
-initial_pos_list = [[[(50 ,465), (300 ,315)]]]
+initial_pos_list = [[]]
 
 class Enemy(pygame.sprite.Sprite):
-	def __init__(self, character, level, number, behavior):
+	def __init__(self, character, level, number):
 		"""
 		arg:
 			character: player number (0 for korea fish)
@@ -17,34 +16,11 @@ class Enemy(pygame.sprite.Sprite):
 		super(Enemy, self).__init__()
 		self.surf = pygame.Surface((60, 90))
 		self.surf.fill((0,0,0))
-		#self.rect = self.surf.get_rect()
-		self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
+		self.rect = self.surf.get_rect()
+		#self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
 		self.character = character
 		self.level = level
 		self.number = number
-		self.b_move_right = True
-		self.behavior = behavior
-
-	def is_out_of_range(self, move_x, floor):
-		if self.rect.left + move_x < floor.left:
-			return True
-		elif self.rect.right + move_x > floor.right:
-			return True
-
-		return False
-
-	def get_floor(self, floor_list):
-		floor_target = Rect(0,0,0,0)
-		diff_min = 100000
-		for ifloor in floor_list:			
-			self.rect.centery
-			if ifloor.left <= self.rect.centerx and ifloor.right >= self.rect.centerx:
-				diff = ifloor.top - self.rect.bottom
-				if diff >= 0 and diff_min > diff:
-					diff_min = diff
-					floor_target = ifloor
-
-		return floor_target
 
 	def update(self, floor_list, player_rect):
 		"""
@@ -55,34 +31,6 @@ class Enemy(pygame.sprite.Sprite):
 			player_rect: player's current rect
 		"""
 		#todo : enemy AI (move)
-		floor = self.get_floor(floor_list)
-		player_x = player_rect.centerx
-		player_y = player_rect.centery
 
-		if self.behavior == 0:       # random move
-			local = random.randint(floor.left, floor.right)
-			if local > self.rect.centerx:
-				self.rect.move_ip(+5, 0)
-			elif local < self.rect.centerx:
-				self.rect.move_ip(-5, 0)
-
-		elif self.behavior == 1:      # the rightest to the leftest
-			move_step = 10
-			if self.b_move_right:
-				if self.is_out_of_range(move_step, floor):
-					self.b_move_right = False					
-				else:
-					self.rect.move_ip(move_step, 0)
-			else:
-				if self.is_out_of_range(-move_step, floor):
-					self.b_move_right = True					
-				else:
-					self.rect.move_ip(-move_step, 0)
-		elif self.behavior == 2:     # close to player
-			move_step = 10
-			if self.rect.centerx < player_x:
-				if not self.is_out_of_range(move_step,floor):
-					self.rect.move_ip(move_step, 0)
-			else:
-				if not self.is_out_of_range(-move_step,floor):
-					self.rect.move_ip(-move_step, 0)
+	def get_rect(self):
+		return self.rect()
