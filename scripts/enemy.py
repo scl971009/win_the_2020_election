@@ -31,3 +31,6 @@ class Enemy(pygame.sprite.Sprite):
 			player_rect: player's current rect
 		"""
 		#todo : enemy AI (move)
+
+	def get_rect(self):
+		return self.rect()
