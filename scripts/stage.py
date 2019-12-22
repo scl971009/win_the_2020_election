@@ -5,9 +5,16 @@ from scripts.player import Player
 from scripts.enemy import Enemy
 from scripts.material import Material
 
+def set_life(num):
+	life = pygame.image.load("img\\stage\\" + str(num) + ".png")
+	life = pygame.transform.scale(life, (60, 70))
+	return life
 
-def stage00(window_surface, background, material_amount):
+def stage00(window_surface, background, material_amount, player):
 	"""stage 1 for korea fish"""
+	life = set_life(player.get_life())
+
+	player.stage_start()
 	floor = pygame.Rect(0, 555, 800, 45)
 	block1 = pygame.Rect(95, 140, 130, 20)
 	block2 = pygame.Rect(570, 140, 135, 20)
@@ -20,7 +27,6 @@ def stage00(window_surface, background, material_amount):
 	floor_list.append(block3)
 	floor_list.append(block4)
 
-	player = Player(0, 190, 465)
 	enemy0 = Enemy(0, 0, 0)
 	enemy1 = Enemy(0, 0, 1)
 	enemy_group = pygame.sprite.Group()
@@ -30,7 +36,9 @@ def stage00(window_surface, background, material_amount):
 	material = Material(0, 0, material_num)
 
 	while True:
+		life = set_life(player.get_life())
 		window_surface.blit(background, (0, 0))
+		window_surface.blit(life, (450, 545))
 		window_surface.blit(player.get_surf(), player.get_rect())
 		window_surface.blit(material.get_surf(), material.get_rect())
 
@@ -45,16 +53,19 @@ def stage00(window_surface, background, material_amount):
 					print(player.get_player_rect().x, player.get_player_rect().y)
 				elif event.key == K_UP:
 					player.jump()
-		'''
+		
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
+					'''
+					if player.get_rect().collidepoint(event.pos):
+						player.life = player.life - 1
 					if material.get_rect().collidepoint(event.pos):
 						material_num = material_num + 1
 						if material_num == material_amount:
 							return True
 						material = Material(0, 0, material_num)
-		'''
+					'''
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.update(floor_list, enemy_group)
@@ -67,8 +78,10 @@ def stage00(window_surface, background, material_amount):
 				return True
 			material = Material(0, 0, material_num)
 
+		if player.get_life() == 0:
+			return False
 
-def start(window_surface, character, level):
+def start(window_surface, character, level, player):
 	"""
 	Determine which stage to run.
 
@@ -85,7 +98,7 @@ def start(window_surface, character, level):
 
 	if character == 0:
 		if level == 0:
-			result = stage00(window_surface, background, 5)
+			result = stage00(window_surface, background, 5, player)
 	return result
 
 class Stage():
@@ -103,9 +116,9 @@ class Stage():
 		self.level = level
 		self.success = False
 
-	def run(self):
+	def run(self, player):
 		"""Run the 'Stage' object"""
-		self.success = start(self.window_surface, self.character, self.level)
+		self.success = start(self.window_surface, self.character, self.level, player)
 
 	def get_result(self):
 		"""

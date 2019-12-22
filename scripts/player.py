@@ -2,8 +2,10 @@ import sys
 import pygame
 from pygame.locals import *
 
+initial_pos_list = [[(190, 465)]]
+
 class Player(pygame.sprite.Sprite):
-	def __init__(self, character, x, y):
+	def __init__(self, character):
 		"""
 		arg:
 			character: player number (0 for korea fish)
@@ -13,11 +15,19 @@ class Player(pygame.sprite.Sprite):
 		super(Player, self).__init__()
 		self.surf = pygame.Surface((60, 90))
 		self.surf.fill((0,0,0))
-		self.rect = self.surf.get_rect(topleft = (x, y))
+		self.rect = self.surf.get_rect()
+		#self.rect = self.surf.get_rect(topleft = (x, y))
 		self.character = character
 		self.life = 5
+		self.stage = 0
 		#maybe you will need force and speed as variable... (I'm not sure. It depends on how you implement jump and gravity.)
 		#I think you might need to save initail position in case player is attacked by enemys
+
+	def stage_start(self):
+		self.rect = self.surf.get_rect(topleft = initial_pos_list[self.character][self.stage])
+
+	def stage_clear(self):
+		self.stage = self.stage + 1
 
 	def update(self, floor_list, enemy_group):
 		"""
@@ -60,3 +70,6 @@ class Player(pygame.sprite.Sprite):
 
 	def get_surf(self):
 		return self.surf
+
+	def get_life(self):
+		return self.life
