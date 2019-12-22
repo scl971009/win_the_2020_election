@@ -6,7 +6,7 @@ from pygame.locals import *
 initial_pos_list = [[[(50 ,465), (300 ,315)]]]
 
 class Enemy(pygame.sprite.Sprite):
-	def __init__(self, character, level, number, behavior):
+	def __init__(self, character, level, number):
 		"""
 		arg:
 			character: player number (0 for korea fish)
@@ -16,14 +16,14 @@ class Enemy(pygame.sprite.Sprite):
 		#todo: change character image to the right character (current: black)
 		super(Enemy, self).__init__()
 		self.surf = pygame.Surface((60, 90))
-		self.surf.fill((0,0,0))
+		self.surf.fill((255,0,0))
 		#self.rect = self.surf.get_rect()
 		self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
 		self.character = character
 		self.level = level
 		self.number = number
 		self.b_move_right = True
-		self.behavior = behavior
+		self.behavior = 1
 
 	def is_out_of_range(self, move_x, floor):
 		if self.rect.left + move_x < floor.left:
@@ -86,3 +86,9 @@ class Enemy(pygame.sprite.Sprite):
 			else:
 				if not self.is_out_of_range(-move_step,floor):
 					self.rect.move_ip(-move_step, 0)
+
+	def get_surf(self):
+		return self.surf
+
+	def get_rect(self):
+		return self.rect

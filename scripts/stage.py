@@ -18,6 +18,8 @@ def action(character, level, window_surface, player, background, material_num, m
 		window_surface.blit(life, (450, 545))
 		window_surface.blit(player.get_surf(), player.get_rect())
 		window_surface.blit(material.get_surf(), material.get_rect())
+		for enemy in enemy_group:
+			window_surface.blit(enemy.get_surf(), enemy.get_rect())
 
 		pygame.display.update()
 
