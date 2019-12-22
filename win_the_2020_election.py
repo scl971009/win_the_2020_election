@@ -4,6 +4,7 @@ from pygame.locals import *
 
 from scripts.intelude import Intelude
 from scripts.stage import Stage
+from scripts.player import Player
 
 def start(window_surface, background):
 	"""
@@ -87,6 +88,29 @@ def choose_player(window_surface, background):
 					if korea_fish.collidepoint(event.pos):
 						return 0
 
+def fail(window_surface):
+	#print("into fail")
+	background = pygame.image.load("img\\else\\fail.png")
+	background = pygame.transform.scale(background, (800, 600))
+	background.convert()
+
+	window_surface.blit(background, (0, 0))
+
+	home = pygame.Rect(280, 345, 265, 65)
+
+	pygame.display.update()
+
+	while True:
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					print(event.pos)
+					if home.collidepoint(event.pos):
+						return
+
 def main():
 	"""the main function"""
 	pygame.init()
@@ -106,15 +130,20 @@ def main():
 
 		if button_main == "start":
 			char = choose_player(window_surface, choose_char)
+			player = Player(0)
 			for i in range(5):
 				story = Intelude(window_surface, char, i, 0)
 				story.run()
 				stage = Stage(window_surface, char, i)
-				stage.run()
+				stage.run(player)
 				result = stage.get_result()
 				if not result:
-					#fail
+					fail(window_surface)
 					break
+				player.stage_clear()
+				story = Intelude(window_surface, char, i, 1)
+				story.run()
+
 		elif button_main == "instruction":
 			rule(window_surface)
 
