@@ -57,7 +57,7 @@ def stage00(window_surface, background, material_amount):
 		'''
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
-		player.gravity(floor_list)
+		player.update(floor_list, enemy_group)
 		enemy0.update(floor_list, player.get_rect())
 		enemy1.update(floor_list, player.get_rect())
 

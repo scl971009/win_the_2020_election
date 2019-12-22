@@ -17,18 +17,30 @@ class Player(pygame.sprite.Sprite):
 		self.character = character
 		self.life = 5
 		#maybe you will need force and speed as variable... (I'm not sure. It depends on how you implement jump and gravity.)
+		#I think you might need to save initail position in case player is attacked by enemys
 
-	def gravity(self, floor_list):
+	def update(self, floor_list, enemy_group):
 		"""
-		This function will be called in the main loop. Simulate gravity when no keys are pressed.
+		This function will be called in the main loop. Simulate collision with floor and enemy.
 
 		arg:
 			floot_list: the list of all floor (rect) in this stage.
+			enemy_group: all enemy's data
 		"""
+		#floor part
+
 		#if not colliding any floor:
 			#move down (not constant velocity)
 		#else:
 			#handle collide
+
+		#enemy part
+
+		#if collides with enemy:
+			#if attacks enemy:
+				#simulate collision with enemy (maybe move up after collision)
+			#else (attacked by enemy):
+				#lose 1 life and sent back to the initial position
 		pass
 
 	def move_left_right(self, pressed_keys):
