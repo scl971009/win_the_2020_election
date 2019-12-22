@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
 	def update(self, floor_list, enemy_group):
 		"""
 		This function will be called in the main loop. Simulate collision with floor and enemy.
-		hint: How to deal with enemy_group: https://stackoverflow.com/questions/43474849/pygame-sprite-collision-with-sprite-group
+		hint: How to deal with enemy_group: pygame.sprite.spritecollideany
 
 		arg:
 			floot_list: the list of all floor (rect) in this stage.
