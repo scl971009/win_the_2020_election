@@ -1,5 +1,4 @@
 import sys
-import time
 import pygame
 from pygame.locals import *
 
@@ -124,9 +123,6 @@ def main():
 	choose_char = pygame.image.load("img\\main\\choose_role.png")
 	choose_char = pygame.transform.scale(choose_char, (800, 600))
 	choose_char.convert()
-	stage_complete = pygame.image.load("img\\else\\collect_success.png")
-	stage_complete = pygame.transform.scale(stage_complete, (800, 600))
-	stage_complete.convert()
 
 	while True:
 
@@ -144,9 +140,6 @@ def main():
 				if not result:
 					fail(window_surface)
 					break
-				window_surface.blit(stage_complete, (0, 0))
-				pygame.display.update()
-				time.sleep(3)
 				player.stage_clear()
 				story = Intelude(window_surface, char, i, 1)
 				story.run()
