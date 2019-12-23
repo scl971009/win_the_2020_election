@@ -1,4 +1,5 @@
 import sys
+import os
 import pygame
 from pygame.locals import *
 
@@ -14,7 +15,8 @@ class Material(pygame.sprite.Sprite):
 			number: which material of this level (start from 0)
 		"""
 		super(Material, self).__init__()
-		image = pygame.image.load("img\\material\\level_" + str(level + 1) + "\\" + str(number) + ".png")
+		# image = pygame.image.load("img\\material\\level_" + str(level + 1) + "\\" + str(number) + ".png")
+		image = pygame.image.load(os.path.join("img", "material", "level_" + str(level + 1) ,  str(number) + ".png"))
 		self.surf = pygame.transform.scale(image, (60, 60))
 		self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
 		self.character = character

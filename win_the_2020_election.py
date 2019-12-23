@@ -1,5 +1,6 @@
 import sys
 import time
+import os
 import pygame
 from pygame.locals import *
 
@@ -43,7 +44,7 @@ def start(window_surface, background):
 
 def rule(window_surface):
 	"""show instruction page"""
-	background = pygame.image.load("img\\else\\rule.png")
+	background = pygame.image.load(os.path.join("img","else","rule.png"))
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
 
@@ -91,7 +92,7 @@ def choose_player(window_surface, background):
 
 def fail(window_surface):
 	#print("into fail")
-	background = pygame.image.load("img\\else\\fail.png")
+	background = pygame.image.load(os.path.join("img","else","fail.png"))
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
 
@@ -117,14 +118,14 @@ def main():
 	pygame.init()
 	window_surface = pygame.display.set_mode((800, 600))
 	pygame.display.set_caption('2020爭霸戰')
-
-	background = pygame.image.load("img\\main\\start.png")
+# /Users/anthelope/Documents/GitHub/win_the_2020_election/img/main/start.png
+	background = pygame.image.load(os.path.join("img","main","start.png"))
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
-	choose_char = pygame.image.load("img\\main\\choose_role.png")
+	choose_char = pygame.image.load(os.path.join("img","main","choose_role.png"))
 	choose_char = pygame.transform.scale(choose_char, (800, 600))
 	choose_char.convert()
-	stage_complete = pygame.image.load("img\\else\\collect_success.png")
+	stage_complete = pygame.image.load(os.path.join("img","else","collect_success.png"))
 	stage_complete = pygame.transform.scale(stage_complete, (800, 600))
 	stage_complete.convert()
 

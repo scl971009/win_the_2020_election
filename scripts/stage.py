@@ -1,4 +1,5 @@
 import sys
+import os
 import pygame
 from pygame.locals import *
 from scripts.player import Player
@@ -6,7 +7,9 @@ from scripts.enemy import Enemy
 from scripts.material import Material
 
 def set_life(num):
-	life = pygame.image.load("img\\stage\\" + str(num) + ".png")
+	# life = pygame.image.load("img\\stage\\" + str(num) + ".png")
+	life = pygame.image.load(os.path.join("img", "stage", str(num) + ".png"))
+
 	life = pygame.transform.scale(life, (60, 70))
 	return life
 
@@ -123,7 +126,8 @@ def start(window_surface, character, level, player):
 		level: which level of this character's game
 	"""
 	#path = "img\\material\\material_location\\stage" + str(level + 1) + "_mateial_location.png"
-	path = "img\\stage\\stage" + str(character) + str(level) + "_all.png"
+	# path = "img\\stage\\stage" + str(character) + str(level) + "_all.png"
+	path = os.path.join("img", "stage", "stage" + str(character) + str(level) + "_all.png")
 	background = pygame.image.load(path)
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
