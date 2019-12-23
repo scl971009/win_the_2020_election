@@ -13,7 +13,8 @@ def set_life(num):
 	life = pygame.transform.scale(life, (60, 70))
 	return life
 
-def action(character, level, window_surface, player, background, material_num, material_amount, floor_list, enemy_group):
+def action(character, level, window_surface, player, background, material_amount, floor_list, enemy_group):
+	material_num = 0
 	material = Material(character, level, material_num)
 	while True:
 		life = set_life(player.get_life())
@@ -31,11 +32,11 @@ def action(character, level, window_surface, player, background, material_num, m
 				pygame.quit()
 				sys.exit()
 			elif event.type == KEYDOWN:
-				if event.key == K_SPACE:
-					print(player.get_player_rect().x, player.get_player_rect().y)
-				elif event.key == K_UP:
+				if event.key == K_UP:
 					player.jump()
-		
+			'''
+				elif event.key == K_SPACE:
+					print(player.get_rect().x, player.get_rect().y)
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
@@ -47,7 +48,7 @@ def action(character, level, window_surface, player, background, material_num, m
 						if material_num == material_amount:
 							return True
 						material = Material(character, level, material_num)
-					
+			'''
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		player.update(floor_list, enemy_group)
@@ -86,7 +87,7 @@ def stage00(window_surface, background, material_amount, player):
 	enemy_group.add(enemy0)
 	enemy_group.add(enemy1)
 
-	return action(0, 0, window_surface, player, background, 0, material_amount, floor_list, enemy_group)
+	return action(0, 0, window_surface, player, background, material_amount, floor_list, enemy_group)
 
 def stage01(window_surface, background, material_amount, player):
 	"""stage 2 for korea fish"""
@@ -113,7 +114,7 @@ def stage01(window_surface, background, material_amount, player):
 	enemy_group.add(enemy1)
 	enemy_group.add(enemy2)
 	
-	return action(0, 1, window_surface, player, background, 0, material_amount, floor_list, enemy_group)
+	return action(0, 1, window_surface, player, background, material_amount, floor_list, enemy_group)
 		
 
 def start(window_surface, character, level, player):
