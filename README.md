@@ -2,6 +2,6 @@
 ### pygame
     pip install pygame
 # 執行
-    python win_the_2020_election
+    python win_the_2020_election.py
 # 其他規則與玩法
 ### 詳細請見遊戲內規則頁
