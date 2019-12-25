@@ -59,6 +59,8 @@ class Player(pygame.sprite.Sprite):
 			self.rect.move_ip(-5, 0)
 		if pressed_keys[K_RIGHT]:
 			self.rect.move_ip(5, 0)
+		if pressed_keys[K_UP]:
+			self.jump()
 
 	def jump(self):
 		""""""

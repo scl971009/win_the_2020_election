@@ -32,10 +32,7 @@ def action(character, level, window_surface, player, background, material_amount
 				pygame.quit()
 				sys.exit()
 			elif event.type == KEYDOWN:
-				if event.key == K_UP:
-					player.jump()
-			'''
-				elif event.key == K_SPACE:
+				if event.key == K_SPACE:
 					print(player.get_rect().x, player.get_rect().y)
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
@@ -48,12 +45,14 @@ def action(character, level, window_surface, player, background, material_amount
 						if material_num == material_amount:
 							return True
 						material = Material(character, level, material_num)
-			'''
+			
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
-		player.update(floor_list, enemy_group)
+		
 		for enemy in enemy_group:
 			enemy.update(floor_list, player.get_rect())
+
+		player.update(floor_list, enemy_group)
 
 		if pygame.sprite.collide_rect(player, material):
 			material_num = material_num + 1
@@ -106,6 +105,7 @@ def stage01(window_surface, background, material_amount, player):
 	floor_list.append(block3)
 	floor_list.append(block4)
 	
+	
 	enemy0 = Enemy(0, 1, 0)
 	enemy1 = Enemy(0, 1, 1)
 	enemy2 = Enemy(0, 1, 2)
@@ -113,6 +113,7 @@ def stage01(window_surface, background, material_amount, player):
 	enemy_group.add(enemy0)
 	enemy_group.add(enemy1)
 	enemy_group.add(enemy2)
+	
 	
 	return action(0, 1, window_surface, player, background, material_amount, floor_list, enemy_group)
 		
