@@ -1,9 +1,10 @@
 import sys
 import pygame
+import os
 import random
 from pygame.locals import *
 
-initial_pos_list = [[[(50 ,465), (300 ,315)]]]
+initial_pos_list = [[[(50 ,465), (300 ,315)]]]  # stage1 initiail_pos
 
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self, character, level, number):
@@ -15,13 +16,19 @@ class Enemy(pygame.sprite.Sprite):
 		"""
 		#todo: change character image to the right character (current: black)
 		super(Enemy, self).__init__()
-		self.surf = pygame.Surface((60, 90))
-		self.surf.fill((255,0,0))
+		# image = pygame.image.load(os.path.join("img", "material", "level_" + str(level + 1), str(number) + ".png"))
+		image = pygame.image.load(os.path.join("img", "enemy", "Level_" + str(level + 1), str(number) + "_R" + ".png"))
+		self.surf = pygame.transform.scale(image, (80, 90))  # new_add
+
+		# self.surf = pygame.Surface((60, 90))  # square_test
+		# self.surf.fill((255,0,0))    # red_square
+
 		#self.rect = self.surf.get_rect()
 		self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
 		self.character = character
 		self.level = level
 		self.number = number
+
 		self.b_move_right = True
 		self.behavior = 1
 
@@ -54,7 +61,7 @@ class Enemy(pygame.sprite.Sprite):
 			floor_list: a list of all floor's rect in this stage
 			player_rect: player's current rect
 		"""
-		#todo : enemy AI (move)
+		# todo : enemy AI (move)
 		floor = self.get_floor(floor_list)
 		player_x = player_rect.centerx
 		player_y = player_rect.centery
