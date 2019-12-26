@@ -5,7 +5,7 @@ import random
 from pygame.locals import *
 
 initial_pos_list = [[[(50 ,465), (300 ,315)]]]  # stage1 initiail_pos
-
+behavior_list = [[[0,1],[0,1,1],[0,2,1,0],[0,2,2,1,2],[2,1,2,0]]]
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self, character, level, number):
 		"""
@@ -23,7 +23,6 @@ class Enemy(pygame.sprite.Sprite):
 		# self.surf = pygame.Surface((60, 90))  # square_test
 		# self.surf.fill((255,0,0))    # red_square
 
-		#self.rect = self.surf.get_rect()
 		self.rect = self.surf.get_rect(topleft = initial_pos_list[character][level][number])
 		self.character = character
 		self.level = level
@@ -65,23 +64,29 @@ class Enemy(pygame.sprite.Sprite):
 		floor = self.get_floor(floor_list)
 		player_x = player_rect.centerx
 		player_y = player_rect.centery
-		move_step = 1  
+		move_step = 3
 		if self.behavior == 0:       # random move
 			local = random.randint(floor.left, floor.right)
 			if local > self.rect.centerx:
-				self.rect.move_ip(+move_step, 0)
+				self.rect.move_ip(+move_step, 0)   # move_ip = move to right a unit
 			elif local < self.rect.centerx:
 				self.rect.move_ip(-move_step, 0)
 
 		elif self.behavior == 1:      # the rightest to the leftest			
 			if self.b_move_right:
 				if self.is_out_of_range(move_step, floor):
-					self.b_move_right = False					
+					self.b_move_right = False   # change direction
+					image = pygame.image.load(os.path.join("img", "enemy", "Level_" + str(self.level + 1), str(self.number) + "_L" + ".png"))
+					self.surf = pygame.transform.scale(image, (80, 90))
 				else:
 					self.rect.move_ip(move_step, 0)
 			else:
 				if self.is_out_of_range(-move_step, floor):
-					self.b_move_right = True					
+					self.b_move_right = True	# rechange
+					image = pygame.image.load(
+						os.path.join("img", "enemy", "Level_" + str(self.level + 1), str(self.number) + "_R" + ".png"))
+					self.surf = pygame.transform.scale(image, (80, 90))
+
 				else:
 					self.rect.move_ip(-move_step, 0)
 		elif self.behavior == 2:     # close to player
