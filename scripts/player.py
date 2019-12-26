@@ -1,5 +1,6 @@
 import sys
 import pygame
+import os
 from pygame.locals import *
 
 initial_pos_list = [[(190, 465), (190, 465)]]
@@ -13,8 +14,10 @@ class Player(pygame.sprite.Sprite):
 		"""
 		#todo: change character image to the right character (current: black)
 		super(Player, self).__init__()
-		self.surf = pygame.Surface((60, 90))
-		self.surf.fill((0,0,0))
+
+		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
+		self.surf  = pygame.transform.scale(image, (60, 90))
+
 		self.rect = self.surf.get_rect()
 		#self.rect = self.surf.get_rect(topleft = (x, y))
 		self.character = character
@@ -57,16 +60,29 @@ class Player(pygame.sprite.Sprite):
 		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT]:
 			self.rect.move_ip(-5, 0)
-		if pressed_keys[K_RIGHT]:
+			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
+			self.surf  = pygame.transform.scale(image, (60, 90))
+		if pressed_keys[K_RIGHT]:	
 			self.rect.move_ip(5, 0)
+			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
+			self.surf  = pygame.transform.scale(image, (60, 90))
 		if pressed_keys[K_UP]:
+
 			self.jump()
 
 	def jump(self):
-		""""""
-		#todo: jump when K_UP is pressed (should not just simply plus y position)
-		print('jump')
 
+                #todo: jump when K_UP is pressed (should not just simply plus y position)
+		print('jump')
+		y=-20
+		self.rect.move_ip(0, y)
+		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_right_jump.png'))
+		self.surf  = pygame.transform.scale(image, (60, 90))
+		if y!=0:
+			self.rect.move_ip(20, y) 
+			self.rect.move_ip(20, 20) 
+
+   
 	def get_rect(self):
 		return self.rect
 
