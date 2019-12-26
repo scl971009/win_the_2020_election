@@ -4,8 +4,8 @@ import os
 import random
 from pygame.locals import *
 
-initial_pos_list = [[[(50 ,465), (300 ,315)]]]  # stage1 initiail_pos
-behavior_list = [[[0,1],[0,1,1],[0,2,1,0],[0,2,2,1,2],[2,1,2,0]]]
+initial_pos_list = [[[(50 ,465), (300 ,315)],[(110,465),(120,30),(340,170)]]]  # stage1 initiail_pos
+behavior_list = [[[0,1],[1,1,1],[0,2,1,0],[0,2,2,1,2],[2,1,2,0]]]
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self, character, level, number):
 		"""
@@ -29,7 +29,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.number = number
 
 		self.b_move_right = True
-		self.behavior = 1
+		self.behavior = 2
 
 	def is_out_of_range(self, move_x, floor):
 		if self.rect.left + move_x < floor.left:
