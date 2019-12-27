@@ -64,7 +64,7 @@ class Player(pygame.sprite.Sprite):
 
 	def jump(self):
 		""""""
-		#todo: jump when K_UP is pressed (should not just simply plus y position)
+		#todo: jump when K_UP is pressed (should not just simply plus y position, maybe plus y-axis acceleration?)
 		print('jump')
 
 	def get_rect(self):
