@@ -65,7 +65,6 @@ def action(character, level, window_surface, player, background, material_amount
 
 def stage00(window_surface, background, material_amount, player):
 	"""stage 1 for korea fish"""
-	life = set_life(player.get_life())
 	player.stage_start()
 
 	floor = pygame.Rect(0, 555, 800, 45)
@@ -90,7 +89,6 @@ def stage00(window_surface, background, material_amount, player):
 
 def stage01(window_surface, background, material_amount, player):
 	"""stage 2 for korea fish"""
-	life = set_life(player.get_life())
 	player.stage_start()
 	
 	floor = pygame.Rect(0, 555, 800, 45)
@@ -105,7 +103,6 @@ def stage01(window_surface, background, material_amount, player):
 	floor_list.append(block3)
 	floor_list.append(block4)
 	
-	
 	enemy0 = Enemy(0, 1, 0)
 	enemy1 = Enemy(0, 1, 1)
 	enemy2 = Enemy(0, 1, 2)
@@ -114,10 +111,96 @@ def stage01(window_surface, background, material_amount, player):
 	enemy_group.add(enemy1)
 	enemy_group.add(enemy2)
 	
-	
 	return action(0, 1, window_surface, player, background, material_amount, floor_list, enemy_group)
-		
 
+def stage02(window_surface, background, material_amount, player):
+	"""stage 3 for korea fish"""
+	player.stage_start()
+	
+	floor = pygame.Rect(0, 0, 0, 0)
+	block1 = pygame.Rect(0, 0, 0, 0)
+	block2 = pygame.Rect(0, 0, 0, 0)
+	block3 = pygame.Rect(0, 0, 0, 0)
+	block4 = pygame.Rect(0, 0, 0, 0)
+	block5 = pygame.Rect(0, 0, 0, 0)
+	floor_list = []
+	floor_list.append(floor)
+	floor_list.append(block1)
+	floor_list.append(block2)
+	floor_list.append(block3)
+	floor_list.append(block4)
+	floor_list.append(block5)
+	
+	enemy0 = Enemy(0, 2, 0)
+	enemy1 = Enemy(0, 2, 1)
+	enemy2 = Enemy(0, 2, 2)
+	enemy3 = Enemy(0, 2, 3)
+	enemy4 = Enemy(0, 2, 4)
+	enemy_group = pygame.sprite.Group()
+	enemy_group.add(enemy0)
+	enemy_group.add(enemy1)
+	enemy_group.add(enemy2)
+	enemy_group.add(enemy3)
+	enemy_group.add(enemy4)
+	
+	return action(0, 2, window_surface, player, background, material_amount, floor_list, enemy_group)
+
+def stage03(window_surface, background, material_amount, player):
+	"""stage 4 for korea fish"""
+	player.stage_start()
+	
+	floor = pygame.Rect(0, 0, 0, 0)
+	block1 = pygame.Rect(0, 0, 0, 0)
+	block2 = pygame.Rect(0, 0, 0, 0)
+	block3 = pygame.Rect(0, 0, 0, 0)
+	block4 = pygame.Rect(0, 0, 0, 0)
+	floor_list = []
+	floor_list.append(floor)
+	floor_list.append(block1)
+	floor_list.append(block2)
+	floor_list.append(block3)
+	floor_list.append(block4)
+	
+	enemy0 = Enemy(0, 3, 0)
+	enemy1 = Enemy(0, 3, 1)
+	enemy2 = Enemy(0, 3, 2)
+	enemy_group = pygame.sprite.Group()
+	enemy_group.add(enemy0)
+	enemy_group.add(enemy1)
+	enemy_group.add(enemy2)
+	
+	return action(0, 3, window_surface, player, background, material_amount, floor_list, enemy_group)
+
+def stage04(window_surface, background, material_amount, player):
+	"""stage 5 for korea fish"""
+	player.stage_start()
+	
+	floor = pygame.Rect(0, 0, 0, 0)
+	block1 = pygame.Rect(0, 0, 0, 0)
+	block2 = pygame.Rect(0, 0, 0, 0)
+	block3 = pygame.Rect(0, 0, 0, 0)
+	block4 = pygame.Rect(0, 0, 0, 0)
+	block5 = pygame.Rect(0, 0, 0, 0)
+	floor_list = []
+	floor_list.append(floor)
+	floor_list.append(block1)
+	floor_list.append(block2)
+	floor_list.append(block3)
+	floor_list.append(block4)
+	floor_list.append(block5)
+	
+	enemy0 = Enemy(0, 4, 0)
+	enemy1 = Enemy(0, 4, 1)
+	enemy2 = Enemy(0, 4, 2)
+	enemy3 = Enemy(0, 4, 3)
+	enemy_group = pygame.sprite.Group()
+	enemy_group.add(enemy0)
+	enemy_group.add(enemy1)
+	enemy_group.add(enemy2)
+	enemy_group.add(enemy3)
+	
+	return action(0, 4, window_surface, player, background, material_amount, floor_list, enemy_group)
+		
 def start(window_surface, character, level, player):
 	"""
 	Determine which stage to run.
@@ -139,6 +222,12 @@ def start(window_surface, character, level, player):
 			result = stage00(window_surface, background, 5, player)
 		elif level == 1:
 			result = stage01(window_surface, background, 4, player)
+		elif level == 2:
+			result = stage03(window_surface, background, 4, player)
+		elif level == 3:
+			result = stage04(window_surface, background, 5, player)
+		elif level == 4:
+			result = stage05(window_surface, background, 7, player)
 	return result
 
 class Stage():
