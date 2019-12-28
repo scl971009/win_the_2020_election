@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
 
 	def update(self, floor_list, enemy_group):
 		"""
-		This function will be called in the main loop. Simulate collision with floor and enemy.
+		This function will be called in the main loop. Simulate collision with floor and enemy and gravity.
 		hint: How to deal with enemy_group: pygame.sprite.spritecollideany
 
 		arg:
