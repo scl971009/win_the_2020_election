@@ -50,7 +50,7 @@ def action(character, level, window_surface, player, background, material_amount
 		player.move_left_right(pressed_keys)
 		
 		for enemy in enemy_group:
-			enemy.update(floor_list, player.get_rect())
+			enemy.update(floor_list, player)
 
 		player.update(floor_list, enemy_group)
 
