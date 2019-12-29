@@ -1,9 +1,12 @@
 import sys
+import time
+import os
 import pygame
 from pygame.locals import *
 
 from scripts.intelude import Intelude
 from scripts.stage import Stage
+from scripts.player import Player
 
 def start(window_surface, background):
 	"""
@@ -41,7 +44,7 @@ def start(window_surface, background):
 
 def rule(window_surface):
 	"""show instruction page"""
-	background = pygame.image.load("img\\else\\rule.png")
+	background = pygame.image.load(os.path.join("img","else","rule.png"))
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
 
@@ -87,18 +90,44 @@ def choose_player(window_surface, background):
 					if korea_fish.collidepoint(event.pos):
 						return 0
 
+def fail(window_surface):
+	#print("into fail")
+	background = pygame.image.load(os.path.join("img","else","fail.png"))
+	background = pygame.transform.scale(background, (800, 600))
+	background.convert()
+
+	window_surface.blit(background, (0, 0))
+
+	home = pygame.Rect(280, 345, 265, 65)
+
+	pygame.display.update()
+
+	while True:
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == pygame.MOUSEBUTTONUP:
+				if event.button == 1:
+					print(event.pos)
+					if home.collidepoint(event.pos):
+						return
+
 def main():
 	"""the main function"""
 	pygame.init()
 	window_surface = pygame.display.set_mode((800, 600))
 	pygame.display.set_caption('2020爭霸戰')
-
-	background = pygame.image.load("img\\main\\start.png")
+# /Users/anthelope/Documents/GitHub/win_the_2020_election/img/main/start.png
+	background = pygame.image.load(os.path.join("img","main","start.png"))
 	background = pygame.transform.scale(background, (800, 600))
 	background.convert()
-	choose_char = pygame.image.load("img\\main\\choose_role.png")
+	choose_char = pygame.image.load(os.path.join("img","main","choose_role.png"))
 	choose_char = pygame.transform.scale(choose_char, (800, 600))
 	choose_char.convert()
+	stage_complete = pygame.image.load(os.path.join("img","else","collect_success.png"))
+	stage_complete = pygame.transform.scale(stage_complete, (800, 600))
+	stage_complete.convert()
 
 	while True:
 
@@ -106,15 +135,23 @@ def main():
 
 		if button_main == "start":
 			char = choose_player(window_surface, choose_char)
+			player = Player(0)
 			for i in range(5):
 				story = Intelude(window_surface, char, i, 0)
 				story.run()
 				stage = Stage(window_surface, char, i)
-				stage.run()
+				stage.run(player)
 				result = stage.get_result()
 				if not result:
-					#fail
+					fail(window_surface)
 					break
+				window_surface.blit(stage_complete, (0, 0))
+				pygame.display.update()
+				time.sleep(3)
+				player.stage_clear()
+				story = Intelude(window_surface, char, i, 1)
+				story.run()
+
 		elif button_main == "instruction":
 			rule(window_surface)
 
