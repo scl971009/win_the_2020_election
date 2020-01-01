@@ -20,7 +20,7 @@ def start(window_surface, background):
 		"setting": setting button pressed
 		"instruction": instruction button pressed
 	"""
-	window_surface.blit(background, (0, 0))
+	window_surface.blit(background, (0, 0))         #after main() started
 
 	start = pygame.Rect(310, 385, 170, 100)
 	setting = pygame.Rect(120, 385, 170, 100)
@@ -35,7 +35,7 @@ def start(window_surface, background):
 				sys.exit()
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
-					if start.collidepoint(event.pos):
+					if start.collidepoint(event.pos):   #click on start img, it return "start" to start()
 						return "start"
 					elif setting.collidepoint(event.pos):
 						print("don't press setting")
@@ -116,7 +116,7 @@ def fail(window_surface):
 def main():
 	"""the main function"""
 	pygame.init()
-	window_surface = pygame.display.set_mode((800, 600))
+	window_surface = pygame.display.set_mode((800, 600))                    
 	pygame.display.set_caption('2020爭霸戰')
 # /Users/anthelope/Documents/GitHub/win_the_2020_election/img/main/start.png
 	background = pygame.image.load(os.path.join("img","main","start.png"))
@@ -131,13 +131,15 @@ def main():
 
 	while True:
 
-		button_main = start(window_surface, background)
+		button_main = start(window_surface, background)    #start()function return "start"
 
-		if button_main == "start":
+		if button_main == "start": #game start
+                        
 			char = choose_player(window_surface, choose_char)
 			player = Player(0)
 			for i in range(5):
 				story = Intelude(window_surface, char, i, 0)
+				
 				story.run()
 				stage = Stage(window_surface, char, i)
 				stage.run(player)
