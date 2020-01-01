@@ -13,6 +13,24 @@ def set_life(num):
 	life = pygame.transform.scale(life, (60, 70))
 	return life
 
+def pause(window_surface):
+	pause = pygame.image.load(os.path.join("img","else","pause.png"))
+	pause = pygame.transform.scale(pause, (800, 600))
+	pause.convert()
+
+	window_surface.blit(pause, (0, 0))
+	pygame.display.update()
+
+	while True:
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == KEYDOWN:
+				if event.key == K_SPACE:
+					return
+
+
 def action(character, level, window_surface, player, background, material_amount, floor_list, enemy_group):
 	material_num = 0
 	material = Material(character, level, material_num)
@@ -33,7 +51,7 @@ def action(character, level, window_surface, player, background, material_amount
 				sys.exit()
 			elif event.type == KEYDOWN:
 				if event.key == K_SPACE:
-					print(player.get_rect().x, player.get_rect().y)
+					pause(window_surface)
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
