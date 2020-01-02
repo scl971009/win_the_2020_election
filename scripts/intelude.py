@@ -2,9 +2,9 @@ import sys
 import pygame
 from pygame.locals import QUIT
 
-#[character][level]
-title_list = [["第一關：翻轉高雄", "第二關：黑韓產業鏈","第三關\：國瑜黨內初選",
-               "第四關：罷免X韓假","第五關：2020總統大選"]]
+#[character][level][title]
+title_list = [[["第一關","翻轉高雄"], ["第二關","黑韓產業鏈"],["第三關","國瑜黨內初選"],
+               ["第四關","罷免X韓假"],["第五關","2020總統大選"]]]
 
 #story_list[character][level][op_ed][line]
 story_list = [[
@@ -51,6 +51,21 @@ story_list = [[
                  "不過，人生就是不斷尋找著下一個目標，就如同曾經說過的：",
                  "「立足台灣，胸懷大陸；」",
                  "「放眼世界，征服宇宙！」"]]]]
+#define color
+black = (0,0,0)
+white = (255,255,255)
+
+def title_font_create(window_surface,character,level):
+     font = pygame.font.Font('story\\fonts\\msj.ttf', 25)        #title format (reusable)
+     level_num = font.render(title_list[character][level][0],True, white, black)  #str, True, string_color, str_bg_color #level==0
+     level_num_rect = level_num.get_rect()
+     level_num_rect.center = (400, 100)
+     window_surface.blit(level_num,level_num_rect)
+
+     level_title = font.render(title_list[character][level][1],True, white, black)  #str, True, string_color, str_bg_color #level==0
+     level_title_rect = level_title.get_rect()
+     level_title_rect.center = (400, 130)
+     window_surface.blit(level_title,level_title_rect)
 
 def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV 1), 0 is op/1 is ed
         """
@@ -60,25 +75,20 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                 window_surface: the window_surface to draw scene
                 character: which character's interlude to show
                 level: which level to show
-                op_ed: show OP(0) or ED(0)
+                op_ed: show OP(0) or ED(1)
         """
-        #define color
-        black = (0,0,0)
-        white = (255,255,255)
-        if not op_ed:            #op = 0 first
+
+        if not op_ed:            #op = 0 in the begining
                 if level == 0:
-                    op_bg_1 = pygame.image.load("img\\intelude\\korean_0_op1.png")
+
+                    #op baground
+                    op_bg_1 = pygame.image.load("img\\intelude\\korean_0_op.png")
                     op_bg_1 = pygame.transform.scale(op_bg_1, (800, 600))
                     op_bg_1 = op_bg_1.convert()
                     window_surface.blit(op_bg_1, (0, 0))
 
-                    font = pygame.font.Font('story\\fonts\\msj.ttf', 25)
-                    text = font.render(title_list[character][level],True, white, black)  #str, True, string_color, str_bg_color 
-                    text_rect = text.get_rect()
-                    text_rect.center = (400, 100)
-                    window_surface.blit(text,text_rect)
-                    print(title_list[character][level])
-                    
+                    title_font_create(window_surface,character,level)
+
                     pygame.display.update()
 
                 elif level == 1:
