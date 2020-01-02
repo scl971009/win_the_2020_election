@@ -35,7 +35,10 @@ class Player(pygame.sprite.Sprite):
 		self.pos = vec(60/ 2,90/ 2)
 		self.vel = vec(0, 0) # 速度
 		self.acc = vec(0, 0) # 加速度
-		self.jumping = False
+		self.xspeed = 0                                 # 水平速度
+		self.yspeed = 0                                 # 垂直速度
+		self.aspeed = 0.5                               # 加速度
+
 
 
 	def stage_start(self):
@@ -45,6 +48,7 @@ class Player(pygame.sprite.Sprite):
 		self.stage = self.stage + 1
 
 	def update(self, floor_list, enemy_group):
+                #def update(self, floor_list, enemy_group):
 		"""
 		This function will be called in the main loop. Simulate collision with floor and enemy and gravity.
 		hint: How to deal with enemy_group: pygame.sprite.spritecollideany
@@ -54,7 +58,7 @@ class Player(pygame.sprite.Sprite):
 			enemy_group: all enemy's data
 		"""
 
-		self.acc = vec(0, PLAYER_GRAV)
+		"""換個方法寫self.acc = vec(0, PLAYER_GRAV )
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_LEFT]:
 			self.acc.x = -PLAYER_ACC
@@ -88,7 +92,7 @@ class Player(pygame.sprite.Sprite):
 				#simulate collision with enemy (maybe move up after collision)
 			#else (attacked by enemy):
 				#lose 1 life and sent back to the initial position
-		pass
+		pass"""
 
 	def move_left_right(self, pressed_keys):
 		""""""
@@ -106,21 +110,18 @@ class Player(pygame.sprite.Sprite):
 		if pressed_keys[K_UP]:
 
 			self.jump()
+		if pressed_keys[K_DOWN]:
+			self.rect.move_ip(0, 3)
 
 	def jump(self):
 
                 #todo: jump when K_UP is pressed (should not just simply plus y position)
-		print('jump')
-		
-		self.acc = vec(0, PLAYER_GRAV)
-		keys =pygame.key.get_pressed()
-		self.rect.y+=2
-		hits=True
-		self.rect.y-=2
-		if hits and not self.jumping:
-			self.jumping = True
-			self.vel.y = -20
-			self.rect[1]=self.acc[1]
+		self.yspeed = -11.5
+		self.jumping()
+	def jumping(self):
+		self.rect.move_ip(self.xspeed,self.yspeed)        
+		self.yspeed = self.yspeed + self.aspeed
+		print(self.yspeed)
 
 
 
