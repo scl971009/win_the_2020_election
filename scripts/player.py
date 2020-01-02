@@ -38,6 +38,7 @@ class Player(pygame.sprite.Sprite):
 		self.xspeed = 0                                 # 水平速度
 		self.yspeed = 0                                 # 垂直速度
 		self.aspeed = 0.5                               # 加速度
+		self.stand=True
 
 
 
@@ -96,6 +97,7 @@ class Player(pygame.sprite.Sprite):
 
 	def move_left_right(self, pressed_keys):
 		""""""
+		
 		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT] and self.rect[0]>0:
 			self.rect.move_ip(-5, 0)
@@ -108,8 +110,11 @@ class Player(pygame.sprite.Sprite):
 			self.surf  = pygame.transform.scale(image, (60, 90))
 
 		if pressed_keys[K_UP]:
-
+			self.stand=False
 			self.jump()
+		if (not pressed_keys[K_UP]) and self.stand==False:
+			self.yspeed = -11.5
+			self.grav()                 
 		if pressed_keys[K_DOWN]:
 			self.rect.move_ip(0, 3)
 
@@ -122,7 +127,11 @@ class Player(pygame.sprite.Sprite):
 		self.rect.move_ip(self.xspeed,self.yspeed)        
 		self.yspeed = self.yspeed + self.aspeed
 		print(self.yspeed)
-
+	def grav(self):
+		self.rect.move_ip(self.xspeed,-self.yspeed)        
+		self.yspeed = -(self.yspeed + self.aspeed)
+		print(self.yspeed)
+		
 
 
                    
