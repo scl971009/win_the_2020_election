@@ -4,12 +4,7 @@ import os
 from pygame.locals import *
 initial_pos_list = [[(190, 465), (190, 465)]]
 vec = pygame.math.Vector2
-WIDTH=60
-HEIGHT=90
-PLAYER_ACC = 0.5
-PLAYER_FRICTION = -0.12
-PLAYER_GRAV = 0.8
-PLAYER_JUMP = 20
+
 class Player(pygame.sprite.Sprite):
 	def __init__(self, character):
 		"""
@@ -33,12 +28,12 @@ class Player(pygame.sprite.Sprite):
 		#I think you might need to save initail position in case player is attacked by enemys
 		self.rect.center = (60/ 2,  90/ 2)
 		self.pos = vec(60/ 2,90/ 2)
-		self.vel = vec(0, 0) # 速度
-		self.acc = vec(0, 0) # 加速度
+		
 		self.xspeed = 0                                 # 水平速度
 		self.yspeed = 0                                 # 垂直速度
 		self.aspeed = 0.5                               # 加速度
 		self.stand=True
+
 
 
 
@@ -47,8 +42,25 @@ class Player(pygame.sprite.Sprite):
 
 	def stage_clear(self):
 		self.stage = self.stage + 1
+                
+
+
 
 	def update(self, floor_list, enemy_group):
+                
+		'''floor_target = Rect(0,0,0,0)
+		diff_min = 100000
+		print(floor_list)
+		print(enemy_group)
+		for ifloor in floor_list:			
+			self.rect.centery
+			if ifloor.left <= self.rect.centerx and ifloor.right >= self.rect.centerx:
+				diff = ifloor.top - self.rect.bottom
+				if diff >= 0 and diff_min > diff:
+					diff_min = diff
+					floor_target = ifloor'''
+		
+
                 #def update(self, floor_list, enemy_group):
 		"""
 		This function will be called in the main loop. Simulate collision with floor and enemy and gravity.
@@ -103,20 +115,22 @@ class Player(pygame.sprite.Sprite):
 			self.rect.move_ip(-5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-
+	
 		if pressed_keys[K_RIGHT] and self.rect[0]<750:	
 			self.rect.move_ip(5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-
+	
 		if pressed_keys[K_UP]:
 			self.stand=False
 			self.jump()
-		if (not pressed_keys[K_UP]) and self.stand==False:
+	
+		if (not pressed_keys[K_UP]) and self.stand==False  :
 			self.yspeed = -11.5
 			self.grav()                 
 		if pressed_keys[K_DOWN]:
 			self.rect.move_ip(0, 3)
+
 
 	def jump(self):
 
@@ -126,11 +140,12 @@ class Player(pygame.sprite.Sprite):
 	def jumping(self):
 		self.rect.move_ip(self.xspeed,self.yspeed)        
 		self.yspeed = self.yspeed + self.aspeed
-		print(self.yspeed)
+
 	def grav(self):
-		self.rect.move_ip(self.xspeed,-self.yspeed)        
-		self.yspeed = -(self.yspeed + self.aspeed)
-		print(self.yspeed)
+		if self.rect[1]<465:
+			self.rect.move_ip(self.xspeed,-self.yspeed)        
+			self.yspeed = -(self.yspeed + self.aspeed)
+
 		
 
 
