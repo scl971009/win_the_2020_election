@@ -268,7 +268,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                       
                                       clicked = True
 
-                                      if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-6]:
+                                      if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-6]:  #last 4 line, change bg 
                                            intelude_BG(window_surface,"img","intelude","korean_final_ed.png")
                                            click_continue_line(window_surface)
 
@@ -282,10 +282,26 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                            pygame.display.update()
                                            
                                            into_end = True
-                                           #Congrats！You beat the game.
-                                           #into_end lead to thanks and credit img,click anywhere to go back to menu
-
-
+                                           
+             if into_end == True:
+                  intelude_BG(window_surface,"img","intelude","congrats.png") #剩下這個圖
+                  pygame.display.update()
+                  while not clicked:
+                        #waiting for user to click to go back to menu, don't know if it works
+                       
+                       for event in pygame.event.get():
+                            if event.type == QUIT:
+                                 pygame.quit()
+                                 sys.exit()
+                            elif event.type == pygame.MOUSEBUTTONUP:
+                                 if event.button == 1:
+                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 1)     
+                                      no_text = font.render("",True,black,white)
+                                      no_text_rect = no_text.get_rect()
+                                      no_text_rect.center = (400,550)
+                                      window_surface.blit(no_text,no_text_rect)
+                                      pygame.display.update()
+                                      clicked = True
 
 
 
