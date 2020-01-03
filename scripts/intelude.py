@@ -287,8 +287,9 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                            into_end = True
                                            
              if into_end == True:
-                  intelude_BG(window_surface,"img","intelude","congrats.png")  #the ending congrats pic has bug
+                  intelude_BG(window_surface,"img","intelude","congrats.jpg")  #the ending congrats pic has bug
                   pygame.display.update()
+                  clicked = False
                   while not clicked:
                        
                        for event in pygame.event.get():

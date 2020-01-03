@@ -241,11 +241,11 @@ def start(window_surface, character, level, player):
 		elif level == 1:
 			result = stage01(window_surface, background, 4, player)
 		elif level == 2:
-			result = stage03(window_surface, background, 4, player)
+			result = stage02(window_surface, background, 4, player)
 		elif level == 3:
-			result = stage04(window_surface, background, 5, player)
+			result = stage03(window_surface, background, 5, player)
 		elif level == 4:
-			result = stage05(window_surface, background, 7, player)
+			result = stage04(window_surface, background, 7, player)
 	return result
 
 class Stage():
