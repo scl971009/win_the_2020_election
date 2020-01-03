@@ -1,4 +1,5 @@
 import sys
+import os
 import pygame
 from pygame.locals import QUIT
 
@@ -9,7 +10,8 @@ title_list = [[["第一關","翻轉高雄"], ["第二關","黑韓產業鏈"],["�
 #story_list[character][level][op_ed][line]
 story_list = [[
                [["2002年，政壇失利；11年後，出任北農總經理……開始嶄露頭角", 
-                 "距離1124的縣市首長大選只剩不到百日，靠著「又老又窮」的一席話、「愛情摩天輪與太平島挖石油」、以及「愛與包容」",
+                 "距離1124的縣市首長大選只剩不到百日",
+                 "靠著「又老又窮」的一席話、「愛情摩天輪與太平島挖石油」、以及「愛與包容」",
                  "他，震撼了整個高雄！！！",
                  "他，究竟是誰？",
                  "他是……韓    國    瑜！"], 
@@ -51,12 +53,13 @@ story_list = [[
                  "不過，人生就是不斷尋找著下一個目標，就如同曾經說過的：",
                  "「立足台灣，胸懷大陸；」",
                  "「放眼世界，征服宇宙！」"]]]]
+
 #define color
 black = (0,0,0)
 white = (255,255,255)
 
 def title_font_create(window_surface,character,level):
-     font = pygame.font.Font('story\\fonts\\msj.ttf', 25)        #title format (reusable)
+     font = pygame.font.Font('story\\fonts\\msj.ttf', 30)        #title format (reusable)
      level_num = font.render(title_list[character][level][0],True, white, black)  #str, True, string_color, str_bg_color #level==0
      level_num_rect = level_num.get_rect()
      level_num_rect.center = (400, 100)
@@ -64,10 +67,17 @@ def title_font_create(window_surface,character,level):
 
      level_title = font.render(title_list[character][level][1],True, white, black)  #str, True, string_color, str_bg_color #level==0
      level_title_rect = level_title.get_rect()
-     level_title_rect.center = (400, 130)
+     level_title_rect.center = (400, 140)
      window_surface.blit(level_title,level_title_rect)
 
-def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV 1), 0 is op/1 is ed
+def intelude_BG(window_surface, file_name_1, file_name_2, file_name_3):
+     intelude_bg = pygame.image.load(os.path.join(file_name_1,file_name_2, file_name_3))
+     intelude_bg = pygame.transform.scale(intelude_bg, (800, 600))
+     intelude_bg = intelude_bg.convert()
+     window_surface.blit(intelude_bg, (0, 0))
+
+
+def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV 1), 0 is op / 1 is ed
         """
         show the corresponding interlude
 
@@ -79,48 +89,88 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
         """
 
         if not op_ed:            #op = 0 in the begining
-                if level == 0:
+             if level == 0:
+                  #op baground
+                  intelude_BG(window_surface, "img","intelude","korean_0_op.png")
+                  title_font_create(window_surface,character,level)
+                  
+                  pygame.display.update()
+                  
+             elif level == 1:
+                  intelude_BG(window_surface,"img","intelude","korean_1_op.png")
+                  title_font_create(window_surface,character,level)
 
-                    #op baground
-                    op_bg_1 = pygame.image.load("img\\intelude\\korean_0_op.png")
-                    op_bg_1 = pygame.transform.scale(op_bg_1, (800, 600))
-                    op_bg_1 = op_bg_1.convert()
-                    window_surface.blit(op_bg_1, (0, 0))
+                  pygame.display.update()
+                  
+             elif level == 2:
+                  print("test")
 
-                    title_font_create(window_surface,character,level)
+             line_pos =  200   
+             for line in story_list[character][level][op_ed][0:]:
+                  clicked = False
+                  while not clicked:
+                       for event in pygame.event.get():
+                            if event.type == QUIT:
+                                 pygame.quit()
+                                 sys.exit()
+                            elif event.type == pygame.MOUSEBUTTONUP:
+                                 if event.button == 1:
+                                      print(line)
+                                      
+                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      line_text = font.render(line,True,(255,255,255),(0,0,0))
+                                      line_rect = line_text.get_rect()
+                                      line_rect.center = (400,line_pos)
+                                      line_pos += 40
+                                      window_surface.blit(line_text,line_rect)
+                                      pygame.display.update() 
+    
+                                      clicked = True
+                                      
+                                      for event in pygame.event.get():
+                                           if line == len(story_list[character][level][op_ed]):
+                                                if event.type == QUIT:
+                                                     pygame.quit()
+                                                     sys.exit()
+                                                elif event.type == pygame.MOUSEBUTTONUP:
+                                                     if event.button == 1:
+                                                          font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                                          line_text = font.render("Click anywhere to start...",True,(255,255,255),(0,0,0))
+                                                          line_rect = line_text.get_rect()
+                                                          line_rect.center = (400,500)
+                                                          window_surface.blit(line_text,line_rect)
+                                                          pygame.display.update()
 
-                    pygame.display.update()
+                                                          clicked = True
+                                      
+                                      
 
-                elif level == 1:
-                    print("test")
-                elif level == 2:
-                    print("test")
-
-                    
-                for line in story_list[character][level][op_ed][0:]:
-                        clicked = False
-                        while not clicked:
-                                for event in pygame.event.get():
-                                        if event.type == QUIT:
-                                                pygame.quit()
-                                                sys.exit()
-                                        elif event.type == pygame.MOUSEBUTTONUP:
-                                                if event.button == 1:
-                                                        print(line)
-                                                        clicked = True
         else:   #op_ed == 1, ending bg
-                print(story_list[character][level][op_ed][0])
-                for line in story_list[character][level][op_ed][1:]:
-                        clicked = False
-                        while not clicked:
-                                for event in pygame.event.get():
-                                        if event.type == QUIT:
-                                                pygame.quit()
-                                                sys.exit()
-                                        elif event.type == pygame.MOUSEBUTTONUP:
-                                                if event.button == 1:
-                                                        print(line)
-                                                        clicked = True
+             if level == 0:
+                  intelude_BG("img","intelude","korean_0_ed.png")
+
+                  pygame.display.update()
+
+
+             elif level == 1:
+                  intelude_bg = pygame.image.load(os.path.join("img","intelude","korean_1_ed.png"))
+                  intelude_bg = pygame.transform.scale(intelude_bg, (800, 600))
+                  intelude_bg = intelude_bg.convert()
+                  window_surface.blit(intelude_bg, (0, 0))
+
+                  pygame.display.update()
+
+             for line in story_list[character][level][op_ed][1:]:
+                  clicked = False
+                  while not clicked:
+                       for event in pygame.event.get():
+                            if event.type == QUIT:
+                                 pygame.quit()
+                                 sys.exit()
+                            elif event.type == pygame.MOUSEBUTTONUP:
+                                 if event.button == 1:
+                                      print(line)
+                                      clicked = True
                 
 class Intelude():
         def __init__(self, window_surface, character, level, op_ed):
