@@ -147,17 +147,15 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
 
         else:   #op_ed == 1, ending bg
              if level == 0:
-                  intelude_BG("img","intelude","korean_0_ed.png")
-
+                  intelude_BG(window_surface,"img","intelude","korean_0_ed.png")
+                  #haven't added line yet
+                  
                   pygame.display.update()
 
 
              elif level == 1:
-                  intelude_bg = pygame.image.load(os.path.join("img","intelude","korean_1_ed.png"))
-                  intelude_bg = pygame.transform.scale(intelude_bg, (800, 600))
-                  intelude_bg = intelude_bg.convert()
-                  window_surface.blit(intelude_bg, (0, 0))
-
+                  intelude_BG(window_surface,"img","intelude","korean_1_ed.png")
+                  
                   pygame.display.update()
 
              for line in story_list[character][level][op_ed][1:]:
