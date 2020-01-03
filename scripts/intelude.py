@@ -5,9 +5,10 @@ from pygame.locals import QUIT
 
 #[character][level][title]
 title_list = [[["第一關","翻轉高雄"], ["第二關","黑韓產業鏈"],["第三關","國瑜黨內初選"],
-               ["第四關","罷免X韓假"],["第五關","2020總統大選"]]]
+               ["第四關","韓假來了"],["第五關","2020總統大選"]]]
 
-#story_list[character][level][op_ed][line]  the last empty string is for awaiting users to click and start
+#story_list[character][level][op_ed][line]
+#the last empty string is for awaiting users to click and start
 story_list = [[[["2002年，政壇失利；11年後，出任北農總經理……開始嶄露頭角", 
                  "距離1124的縣市首長大選只剩不到百日",
                  "靠著「又老又窮」的一席話、「愛情摩天輪與太平島挖石油」、以及「愛與包容」",
@@ -28,7 +29,7 @@ story_list = [[[["2002年，政壇失利；11年後，出任北農總經理…�
                  ""], 
                 ["歷經韓黑份子、預算卡韓、1450、爵卿等各類黑韓產業鏈的四處抹黑",
                  "韓市長用闢眼看著他們，一派輕鬆地將這些假韓粉們一一擊倒", 
-                 "緊接著，摑面黨的2020總統候選人初選即將開始；",
+                 "緊接著，摑面黨的2020總統候選人初選即將開始",
                  "苦民所苦，睡到中午的韓市長",
                  "整日輾轉反側，心想替高雄以外的庶民盡一份心力！",
                  ""]],
@@ -40,31 +41,44 @@ story_list = [[[["2002年，政壇失利；11年後，出任北農總經理…�
                  "不過在那之前要先在國瑜黨內初選勝出，才能取得總統大選的門票",
                  "初選的結果究竟是……",
                  ""],
-                ["在經歷腥風血雨的初選，最終不出所料，是由庶民代表韓總機贏得總統大選的門票；",
-                 "但，距離總統的寶座還有一段距離……。",
+                ["經歷腥風血雨的初選",
+                 "最終不出所料",
+                 "是由庶民代表韓總機贏得總統大選的門票",
+                 "但",
+                 "距離總統的寶座還有一段距離……",
                  ""]],
-               [["在經過激烈的黨內初選後，韓國輸距離總統僅一步之遙。",
-                 "不過隨著大選的到來……",
-                 "「現在有5顆核彈在等著炸死韓國瑜，老大哥正在睜大眼睛看」，民調的結果也隨之變化莫測",
+               [["隨著大選的到來",
+                 "「現在有5顆核彈在等著炸死韓國瑜」",
+                 "民調起伏也變化莫測",
+                 "韓國輸為了準備選戰，請了韓假磨刀霍霍向韓黑",
                  "看來又是一場腥風血雨……",
                  ""],
                 ["「非常小癟三、非常窩囊的行為」",
                  "「得民心者，得天下；得民調者，得痔瘡！」",
                  "「假民調！」",
-                 "韓國輸似乎已經找到對付神掌與香菜英文的絕佳方法了",
+                 "韓國輸似乎已經找到對付爵卿與1450的絕佳方法了",
                  "終於又離總統寶座近了一步！",
                  ""]],
-               [["該來的總是要來，終於來到了最終決戰",
-                 "究竟這場三方對決的結果會是如何呢？",
-                 "我們的庶民總統、蔣公轉世、世界的偉人韓總機會獲勝嗎？",
+               [["大選的日子，已經近在咫尺",
+                 "「中華民國萬歲！中華民國萬歲！中華民國萬歲！」",
+                 "韓總一派輕鬆地在政見發表會上力抗神掌與香菜英文",
+                 "台灣的媒體不出所料，只會提漱口杯問題，根本不及韓總寬廣如大海般的視野！",
+                 "但在開票之前，沒人能肯定這場選舉的結果",
+                 "我們的庶民總統韓總有機會獲勝嗎？",
                  "讓我們繼續看下去……",
                  ""],
                 ["終於！！！！！",
-                 "韓總成為了庶民總統，達到了此生的巔峰",
-                 "不過，人生就是不斷尋找著下一個目標，就如同韓總統 國瑜曾經說過的：",
-                 "「立足台灣，胸懷大陸；",
-                 "放眼世界，征服宇宙！」",
+                 "蔣公轉世、世界的偉人「韓總」成為了我大華民國自由地區的庶民總統",
+                 "達到了此生的巔峰！",
+                 "不過，人生就是不斷尋找著下一個目標",
+                 "就如同韓總統 國瑜曾經說過的：",
+                 ""
+                 "「立足台灣，",
+                 "  胸懷大陸；",
+                 "  放眼世界，",
+                 "  征服宇宙！」",
                  ""]]]]
+# finel len = 11
 
 #define color
 black = (0,0,0)
@@ -89,7 +103,7 @@ def intelude_BG(window_surface, file_name_1, file_name_2, file_name_3):
      window_surface.blit(intelude_bg, (0, 0))
 
 def click_continue_line(window_surface):                    #remind user to click continue
-     font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+     font = pygame.font.Font('story\\fonts\\msj.ttf', 19)
      continue_line = font.render("Click anywhere to continue...",True,white,black)
      continue_line_rect = continue_line.get_rect()
      continue_line_rect.center = (400,550)
@@ -107,7 +121,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                 op_ed: show OP(0) or ED(1)
         """
 
-        if not op_ed:            #op = 0 in the begining
+        if op_ed == 0:            #op = 0 in the begining
 
              if level == 0:
                   intelude_BG(window_surface, "img","intelude","korean_0_op.png")
@@ -141,7 +155,6 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
 
              line_pos =  200   
              for line in story_list[character][level][op_ed][0:]:
-                                           
                   clicked = False
                   while not clicked:
                        for event in pygame.event.get():
@@ -162,8 +175,8 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
     
                                       clicked = True
 
-                                      if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:  
-                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
+                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
                                            line_text = font.render("  Click anywhere to start. . . . ",True,black,white)
                                            line_rect = line_text.get_rect()
                                            line_rect.center = (400,550)
@@ -171,8 +184,8 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                            pygame.display.update()
                                       
                                       
-
-        else:   #op_ed == 1, ending bg
+        #op_ed == 1, ending bg
+        elif op_ed == 1 and level != 4:   
              if level == 0:
                   intelude_BG(window_surface,"img","intelude","korean_0_ed.png")
                   click_continue_line(window_surface)
@@ -199,7 +212,8 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
 
                   #level 4 requires new codes
                   
-             for line in story_list[character][level][op_ed][1:]:
+             line_pos_2 = 150
+             for line in story_list[character][level][op_ed][0:]:
                   clicked = False
                   while not clicked:
                        for event in pygame.event.get():
@@ -209,8 +223,72 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
                                       print(line)
+
+                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      line_text = font.render(line,True,white,black)
+                                      line_rect = line_text.get_rect()
+                                      line_rect.center = (400,line_pos_2)
+                                      line_pos_2 += 40
+                                      window_surface.blit(line_text,line_rect)
+                                      pygame.display.update() 
+                                      
                                       clicked = True
-                
+
+                                      if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
+                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
+                                           start_text = font.render("Click anywhere to enter the next level...",True,black,white)
+                                           start_text_rect = start_text.get_rect()
+                                           start_text_rect.center = (400,550)
+                                           window_surface.blit(start_text,start_text_rect)
+                                           pygame.display.update()
+
+        #final level ed
+        elif op_ed == 1 and level == 4:
+             intelude_BG(window_surface,"img","intelude","korean_4_ed.png")
+             click_continue_line(window_surface)
+
+             for line in story_list[character][level][op_ed][0:]:
+                  clicked = False
+                  while not clicked:
+                       for event in pygame.event.get():
+                            if event.type == QUIT:
+                                 pygame.quit()
+                                 sys.exit()
+                            elif event.type == pygame.MOUSEBUTTONUP:
+                                 if event.button == 1:
+                                      print(line)
+
+                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      line_text = font.render(line,True,white,black)
+                                      line_rect = line_text.get_rect()
+                                      line_rect.center = (400,line_pos_2)
+                                      line_pos_2 += 40
+                                      window_surface.blit(line_text,line_rect)
+                                      pygame.display.update() 
+                                      
+                                      clicked = True
+
+                                      if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-6]:
+                                           intelude_BG(window_surface,"img","intelude","korean_final_ed.png")
+                                           click_continue_line(window_surface)
+
+                                      elif line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
+                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
+                                           start_text = font.render("This is the ending, click anywhere to continue.",True,black,white)
+                                           start_text_rect = start_text.get_rect()
+                                           start_text_rect.center = (400,550)
+                                           window_surface.blit(start_text,start_text_rect)
+                                           
+                                           pygame.display.update()
+                                           
+                                           into_end = True
+                                           #Congrats！You beat the game.
+                                           #into_end lead to thanks and credit img,click anywhere to go back to menu
+
+
+
+
+
 class Intelude():
         def __init__(self, window_surface, character, level, op_ed):
                 """
