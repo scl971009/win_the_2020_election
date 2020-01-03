@@ -71,7 +71,7 @@ story_list = [[[["2002年，政壇失利；11年後，出任北農總經理…�
                  "蔣公轉世、世界的偉人「韓總」成為了我大華民國自由地區的庶民總統",
                  "達到了此生的巔峰！",
                  "不過，人生就是不斷尋找著下一個目標",
-                 "就如同韓總統 國瑜曾經說過的：",
+                 "就如同韓總統  國瑜曾經說過的：",
                  ""
                  "「立足台灣，",
                  "  胸懷大陸；",
@@ -163,7 +163,6 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                  sys.exit()
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
-                                      print(line)
                                       
                                       font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
                                       line_text = font.render(line,True,white,black)
@@ -222,7 +221,6 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                  sys.exit()
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
-                                      print(line)
 
                                       font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
                                       line_text = font.render(line,True,white,black)
@@ -247,6 +245,9 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
              intelude_BG(window_surface,"img","intelude","korean_4_ed.png")
              click_continue_line(window_surface)
 
+             line_pos_2 = 150
+             final_text_size = 18
+             move_down = 40
              for line in story_list[character][level][op_ed][0:]:
                   clicked = False
                   while not clicked:
@@ -256,13 +257,12 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                  sys.exit()
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
-                                      print(line)
-
-                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      
+                                      font = pygame.font.Font('story\\fonts\\msj.ttf', final_text_size)
                                       line_text = font.render(line,True,white,black)
                                       line_rect = line_text.get_rect()
                                       line_rect.center = (400,line_pos_2)
-                                      line_pos_2 += 40
+                                      line_pos_2 += move_down
                                       window_surface.blit(line_text,line_rect)
                                       pygame.display.update() 
                                       
@@ -271,6 +271,9 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                       if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-6]:  #last 4 line, change bg 
                                            intelude_BG(window_surface,"img","intelude","korean_final_ed.png")
                                            click_continue_line(window_surface)
+                                           line_pos_2 = 150
+                                           final_text_size = 30
+                                           move_down =55
 
                                       elif line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
                                            font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
@@ -284,10 +287,9 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                            into_end = True
                                            
              if into_end == True:
-                  intelude_BG(window_surface,"img","intelude","congrats.png") #剩下這個圖
+                  intelude_BG(window_surface,"img","intelude","congrats.png")  #the ending congrats pic has bug
                   pygame.display.update()
                   while not clicked:
-                        #waiting for user to click to go back to menu, don't know if it works
                        
                        for event in pygame.event.get():
                             if event.type == QUIT:

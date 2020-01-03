@@ -137,7 +137,7 @@ def main():
                         
 			char = choose_player(window_surface, choose_char)
 			player = Player(0)
-			for i in range(5): 
+			for i in range(5):
 				story = Intelude(window_surface, char, i, 0) 
 				story.run()
 				stage = Stage(window_surface, char, i)
