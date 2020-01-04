@@ -34,6 +34,9 @@ class Player(pygame.sprite.Sprite):
 		self.aspeed = 0.5                               # 加速度
 		self.stand=True
 
+		
+			
+
 
 
 
@@ -52,6 +55,14 @@ class Player(pygame.sprite.Sprite):
                 
 		floor_target = Rect(0,0,0,0)
 		diff_min=100000
+		for enemy in enemy_group:
+			if pygame.Rect.colliderect(self.rect, enemy)and self.rect.centery > enemy.rect.centery:
+				print('coll')
+				self.life -= 1
+				self.stage_start()
+				self.image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
+
+				
 
 		for ifloor in floor_list:			
 
