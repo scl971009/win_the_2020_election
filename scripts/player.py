@@ -47,19 +47,28 @@ class Player(pygame.sprite.Sprite):
 
 
 	def update(self, floor_list, enemy_group):
+
+                        
                 
-		'''floor_target = Rect(0,0,0,0)
-		diff_min = 100000
-		print(floor_list)
-		print(enemy_group)
+		floor_target = Rect(0,0,0,0)
+		diff_min=100000
+
 		for ifloor in floor_list:			
-			self.rect.centery
-			if ifloor.left <= self.rect.centerx and ifloor.right >= self.rect.centerx:
+
+			if ifloor.left <= self.rect.left and ifloor.right >= self.rect.right:
+                                
 				diff = ifloor.top - self.rect.bottom
-				if diff >= 0 and diff_min > diff:
-					diff_min = diff
-					floor_target = ifloor'''
-		
+				diff2= ifloor.bottom - self.rect.top
+
+				if diff >= 0  and diff_min > diff :
+					self.stand=False
+
+				else:
+					self.stand=True
+
+
+
+
 
                 #def update(self, floor_list, enemy_group):
 		"""
@@ -109,7 +118,7 @@ class Player(pygame.sprite.Sprite):
 
 	def move_left_right(self, pressed_keys):
 		""""""
-		
+
 		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT] and self.rect[0]>0:
 			self.rect.move_ip(-5, 0)
@@ -121,35 +130,32 @@ class Player(pygame.sprite.Sprite):
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
 	
-		if pressed_keys[K_UP]:
+		if pressed_keys[K_UP] :
 			self.stand=False
 			self.jump()
 	
 		if (not pressed_keys[K_UP]) and self.stand==False  :
 			self.yspeed = -11.5
-			self.grav()                 
-		if pressed_keys[K_DOWN]:
-			self.rect.move_ip(0, 3)
+			self.grav()
+
 
 
 	def jump(self):
 
                 #todo: jump when K_UP is pressed (should not just simply plus y position)
-		self.yspeed = -11.5
+		self.yspeed = -15
 		self.jumping()
 	def jumping(self):
 		self.rect.move_ip(self.xspeed,self.yspeed)        
 		self.yspeed = self.yspeed + self.aspeed
-
 	def grav(self):
-		if self.rect[1]<465:
+		if self.rect[1]<465  :
 			self.rect.move_ip(self.xspeed,-self.yspeed)        
 			self.yspeed = -(self.yspeed + self.aspeed)
 
-		
 
 
-                   
+	
 	def get_rect(self):
 		return self.rect
 
