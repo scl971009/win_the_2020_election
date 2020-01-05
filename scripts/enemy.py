@@ -4,8 +4,18 @@ import os
 import random
 from pygame.locals import *
 
-initial_pos_list = [[[(50 ,465), (300 ,315)],[(110,465),(120,30),(340,170)]]]  # stage1 initiail_pos
-behavior_list = [[[4,3],[1,1,1],[0,2,1,0],[0,2,2,1,2],[2,1,2,0]]]
+initial_pos_list = [[[(50, 465), (300, 315)],
+					 [(50, 465), (120,30), (340,170)],
+					 [(50, 465), (120,30), (340,170), (340,170), (340,170)],
+					 [(50, 465), (120,30), (340,170)],
+					 [(50, 465), (120,30), (340,170), (340,170)]
+					 ]]  # stage1 initiail_pos
+behavior_list = [[[4, 3],
+				  [1, 1, 1],
+				  [0, 2, 1, 0, 1],
+				  [1, 2, 2],
+				  [2, 1, 2, 0]
+				  ]]
 
 def get_floor(sprite, floor_list):
 	floor_target = Rect(0,0,0,0)
