@@ -85,7 +85,7 @@ black = (0,0,0)
 white = (255,255,255)
 
 def title_font_create(window_surface,character,level):
-     font = pygame.font.Font('story\\fonts\\msj.ttf', 30)        #title format (reusable)
+     font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 30)        #title format (reusable)
      level_num = font.render(title_list[character][level][0],True, white, black)  #str, True, string_color, str_bg_color #level==0
      level_num_rect = level_num.get_rect()
      level_num_rect.center = (400, 100)
@@ -103,7 +103,7 @@ def intelude_BG(window_surface, file_name_1, file_name_2, file_name_3):
      window_surface.blit(intelude_bg, (0, 0))
 
 def click_continue_line(window_surface):                    #remind user to click continue
-     font = pygame.font.Font('story\\fonts\\msj.ttf', 19)
+     font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 19)
      continue_line = font.render("Click anywhere to continue...",True,white,black)
      continue_line_rect = continue_line.get_rect()
      continue_line_rect.center = (400,550)
@@ -164,7 +164,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
                                       
-                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 18)
                                       line_text = font.render(line,True,white,black)
                                       line_rect = line_text.get_rect()
                                       line_rect.center = (400,line_pos)
@@ -175,7 +175,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                       clicked = True
 
                                       if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
-                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
+                                           font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 20)
                                            line_text = font.render("  Click anywhere to start. . . . ",True,black,white)
                                            line_rect = line_text.get_rect()
                                            line_rect.center = (400,550)
@@ -222,7 +222,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
 
-                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 18)
+                                      font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 18)
                                       line_text = font.render(line,True,white,black)
                                       line_rect = line_text.get_rect()
                                       line_rect.center = (400,line_pos_2)
@@ -233,7 +233,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                       clicked = True
 
                                       if line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
-                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
+                                           font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 20)
                                            start_text = font.render("Click anywhere to enter the next level...",True,black,white)
                                            start_text_rect = start_text.get_rect()
                                            start_text_rect.center = (400,550)
@@ -258,7 +258,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
                                       
-                                      font = pygame.font.Font('story\\fonts\\msj.ttf', final_text_size)
+                                      font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), final_text_size)
                                       line_text = font.render(line,True,white,black)
                                       line_rect = line_text.get_rect()
                                       line_rect.center = (400,line_pos_2)
@@ -276,7 +276,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                            move_down =55
 
                                       elif line == story_list[character][level][op_ed][len(story_list[character][level][op_ed])-2]:
-                                           font = pygame.font.Font('story\\fonts\\msj.ttf', 20)
+                                           font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 20)
                                            start_text = font.render("This is the ending, click anywhere to continue.",True,black,white)
                                            start_text_rect = start_text.get_rect()
                                            start_text_rect.center = (400,550)
@@ -287,7 +287,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                            into_end = True
                                            
              if into_end == True:
-                  intelude_BG(window_surface,"img","intelude","congrats.jpg")  #the ending congrats pic has bug
+                  intelude_BG(window_surface,"img","intelude","congrats.jpg")  
                   pygame.display.update()
                   clicked = False
                   while not clicked:
@@ -298,7 +298,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                                  sys.exit()
                             elif event.type == pygame.MOUSEBUTTONUP:
                                  if event.button == 1:
-                                      font = pygame.font.Font('story\\fonts\\msj.ttf', 1)     
+                                      font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 1)     
                                       no_text = font.render("",True,black,white)
                                       no_text_rect = no_text.get_rect()
                                       no_text_rect.center = (400,550)
