@@ -45,6 +45,7 @@ class Player(pygame.sprite.Sprite):
 
 	def stage_clear(self):
 		self.stage = self.stage + 1
+		self.life = 5
                 
 
 
@@ -62,8 +63,15 @@ class Player(pygame.sprite.Sprite):
 				self.stage_start()
 				self.image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
 
-				
+		for ifloor in floor_list:			
 
+			if pygame.Rect.colliderect(self.rect, ifloor)and self.stand==False:
+
+				self.stand=True
+                                
+				
+				
+		'''
 		for ifloor in floor_list:			
 
 			if ifloor.left <= self.rect.left and ifloor.right >= self.rect.right:
@@ -75,13 +83,13 @@ class Player(pygame.sprite.Sprite):
 					self.stand=False
 
 				else:
-					self.stand=True
+					self.stand=True'''
 
 
 
 
 
-                #def update(self, floor_list, enemy_group):
+
 		"""
 		This function will be called in the main loop. Simulate collision with floor and enemy and gravity.
 		hint: How to deal with enemy_group: pygame.sprite.spritecollideany
