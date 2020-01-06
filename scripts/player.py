@@ -72,20 +72,9 @@ class Player(pygame.sprite.Sprite):
 				if diff >= 0 and diff_min > diff:
 					diff_min = diff'''
 
-		if  pygame.Rect.colliderect(self.rect, floor_list[0]):
+		if  pygame.Rect.collidelistall(self.rect, floor_list):
 					self.stand=True
 
-		elif  pygame.Rect.colliderect(self.rect, floor_list[1]) :				
-					self.stand=True
-                                        
-		elif  pygame.Rect.colliderect(self.rect, floor_list[2]) :                                        
-					self.stand=True
-
-		elif  pygame.Rect.colliderect(self.rect, floor_list[3]) :				
-					self.stand=True
-
-		elif  pygame.Rect.colliderect(self.rect, floor_list[4]) :				
-					self.stand=True
 
 		else:
 					self.yspeed = -11.5
