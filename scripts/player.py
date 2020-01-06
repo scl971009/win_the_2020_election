@@ -33,6 +33,9 @@ class Player(pygame.sprite.Sprite):
 		self.yspeed = 0                                 # 垂直速度
 		self.aspeed = 0.5                               # 加速度
 		self.stand=True
+		self.fall=False
+
+
 
 		
 			
@@ -46,31 +49,93 @@ class Player(pygame.sprite.Sprite):
 	def stage_clear(self):
 		self.stage = self.stage + 1
 		self.life = 5
+
+
+
+					
+					
+			
+					                
                 
 
 
 
-	def update(self, floor_list, enemy_group):
+	def update(self,floor_list, enemy_group):
+		floor=[]
+		a=[]
+		
+		'''for ifloor in floor_list:
 
-                        
-                
-		floor_target = Rect(0,0,0,0)
+			diff_min = 100000
+
+			if ifloor.left <= self.rect.center[0] and ifloor.right >= self.rect.center[0]:
+				diff = ifloor.top - self.rect.bottom
+				if diff >= 0 and diff_min > diff:
+					diff_min = diff'''
+
+		if  pygame.Rect.colliderect(self.rect, floor_list[0]) :
+				
+
+				self.stand=True
+		
+		elif  pygame.Rect.colliderect(self.rect, floor_list[1]) :				
+				self.stand=True
+		elif  pygame.Rect.colliderect(self.rect, floor_list[2]) :				
+				self.stand=True
+		elif  pygame.Rect.colliderect(self.rect, floor_list[3]) :				
+				self.stand=True
+		elif  pygame.Rect.colliderect(self.rect, floor_list[4]) :				
+				self.stand=True
+
+		else:
+				self.yspeed = -11.5
+				self.stand=False
+		
+				
+
+				
+
+					
+
+
+
+
+                     
+		
 		diff_min=100000
 		for enemy in enemy_group:
 			if pygame.Rect.colliderect(self.rect, enemy)and self.rect.centery > enemy.rect.centery:
-				print('coll')
-				self.life -= 1
-				self.stage_start()
-				self.image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
+				
+					print('coll')
+					self.life -= 1
+					self.stage_start()
+					self.coll
 
-		for ifloor in floor_list:			
 
-			if pygame.Rect.colliderect(self.rect, ifloor)and self.stand==False:
+
+					
+
+
+			
+		'''alpha=self.rect[0]-ifloor.left
+			beta=self.rect[1]-ifloor.top
+			print(alpha,beta)
+			if pygame.Rect.colliderect(self.rect, ifloor) :
 
 				self.stand=True
-                                
+			else:
+
+				self.stand==False'''
 				
-				
+		'''for ifloor in floor_list:                 
+			if pygame.Rect.colliderect(self.rect, ifloor) :
+
+				self.stand=True
+			else:
+
+				self.stand==False  
+			print(self.rect[0]-ifloor.left)'''
+			
 		'''
 		for ifloor in floor_list:			
 
@@ -134,21 +199,25 @@ class Player(pygame.sprite.Sprite):
 			#else (attacked by enemy):
 				#lose 1 life and sent back to the initial position
 		pass"""
+	def coll(self):
+		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
 
 	def move_left_right(self, pressed_keys):
 		""""""
 
 		#todo: move when left, right is pressed (remember to set bounds)
-		if pressed_keys[K_LEFT] and self.rect[0]>0:
+		if pressed_keys[K_LEFT] and self.rect[0]>0  :
 			self.rect.move_ip(-5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-	
-		if pressed_keys[K_RIGHT] and self.rect[0]<750:	
+
+
+
+		if pressed_keys[K_RIGHT] and self.rect[0]<750  :	
 			self.rect.move_ip(5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-	
+
 		if pressed_keys[K_UP] :
 			self.stand=False
 			self.jump()
