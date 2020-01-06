@@ -2,7 +2,7 @@ import sys
 import pygame  
 import os
 from pygame.locals import *
-initial_pos_list = [[(190, 465), (190, 465)]]
+initial_pos_list = [[(190, 465), (190, 465), (190, 465), (190, 465), (190, 465)]]
 vec = pygame.math.Vector2
 
 class Player(pygame.sprite.Sprite):
