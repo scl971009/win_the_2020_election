@@ -61,8 +61,7 @@ class Player(pygame.sprite.Sprite):
 
 
 	def update(self,floor_list, enemy_group):
-		floor=[]
-		a=[]
+
 		
 		'''for ifloor in floor_list:
 
@@ -73,24 +72,25 @@ class Player(pygame.sprite.Sprite):
 				if diff >= 0 and diff_min > diff:
 					diff_min = diff'''
 
-		if  pygame.Rect.colliderect(self.rect, floor_list[0]) :
-				
+		if  pygame.Rect.colliderect(self.rect, floor_list[0]):
+					self.stand=True
 
-				self.stand=True
-		
 		elif  pygame.Rect.colliderect(self.rect, floor_list[1]) :				
-				self.stand=True
-		elif  pygame.Rect.colliderect(self.rect, floor_list[2]) :				
-				self.stand=True
+					self.stand=True
+                                        
+		elif  pygame.Rect.colliderect(self.rect, floor_list[2]) :                                        
+					self.stand=True
+
 		elif  pygame.Rect.colliderect(self.rect, floor_list[3]) :				
-				self.stand=True
+					self.stand=True
+
 		elif  pygame.Rect.colliderect(self.rect, floor_list[4]) :				
-				self.stand=True
+					self.stand=True
 
 		else:
-				self.yspeed = -11.5
-				self.stand=False
-		
+					self.yspeed = -11.5
+					self.stand=False
+
 				
 
 				
@@ -109,7 +109,7 @@ class Player(pygame.sprite.Sprite):
 					print('coll')
 					self.life -= 1
 					self.stage_start()
-					self.coll
+					self.coll()
 
 
 
@@ -201,6 +201,7 @@ class Player(pygame.sprite.Sprite):
 		pass"""
 	def coll(self):
 		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
+		self.surf  = pygame.transform.scale(image, (60, 90))
 
 	def move_left_right(self, pressed_keys):
 		""""""
@@ -225,6 +226,12 @@ class Player(pygame.sprite.Sprite):
 		if (not pressed_keys[K_UP]) and self.stand==False  :
 			self.yspeed = -11.5
 			self.grav()
+		if pressed_keys[K_UP] and pressed_keys[K_RIGHT]:
+			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_right_jump.png'))
+			self.surf  = pygame.transform.scale(image, (60, 90))
+		if pressed_keys[K_UP] and pressed_keys[K_LEFT]:
+			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_left_jump.png'))
+			self.surf  = pygame.transform.scale(image, (60, 90))
 
 
 
@@ -237,6 +244,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.move_ip(self.xspeed,self.yspeed)        
 		self.yspeed = self.yspeed + self.aspeed
 	def grav(self):
+		self.fall=True
 		if self.rect[1]<465  :
 			self.rect.move_ip(self.xspeed,-self.yspeed)        
 			self.yspeed = -(self.yspeed + self.aspeed)
