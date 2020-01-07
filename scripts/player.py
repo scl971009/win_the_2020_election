@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 		self.stage = 0
 		#maybe you will need force and speed as variable... (I'm not sure. It depends on how you implement jump and gravity.)
 		#I think you might need to save initail position in case player is attacked by enemys
-		self.rect.center = (60/ 2,  90/ 2)
+		self.rect.center = (60/ 2,  90/ 45)
 		self.pos = vec(60/ 2,90/ 2)
 		
 		self.xspeed = 0                                 # 水平速度
@@ -72,10 +72,32 @@ class Player(pygame.sprite.Sprite):
 				if diff >= 0 and diff_min > diff:
 					diff_min = diff'''
 
-		if  pygame.Rect.collidelistall(self.rect, floor_list):
+
+		if  pygame.Rect.colliderect(self.rect, floor_list[0]):
+			a=(self.rect.bottom-floor_list[0].top)
+			if 0<=self.rect.bottom-floor_list[0].top<15:
 					self.stand=True
-
-
+					self.rect.move_ip(0,-a)
+		elif  pygame.Rect.colliderect(self.rect, floor_list[1]):
+			a=(self.rect.bottom-floor_list[1].top)
+			if 0<=self.rect.bottom-floor_list[1].top<15:
+					self.stand=True
+					self.rect.move_ip(0,-a)
+		elif  pygame.Rect.colliderect(self.rect, floor_list[2]):
+			a=(self.rect.bottom-floor_list[2].top)
+			if 0<=self.rect.bottom-floor_list[2].top<15:
+					self.stand=True
+					self.rect.move_ip(0,-a)
+		elif  pygame.Rect.colliderect(self.rect, floor_list[3]):
+			a=(self.rect.bottom-floor_list[3].top)
+			if 0<=self.rect.bottom-floor_list[3].top<15:
+					self.stand=True
+					self.rect.move_ip(0,-a)
+		elif  pygame.Rect.colliderect(self.rect, floor_list[4]):
+			a=(self.rect.bottom-floor_list[4].top)
+			if 0<=self.rect.bottom-floor_list[4].top<15:
+					self.stand=True
+					self.rect.move_ip(0,-a)
 		else:
 					self.yspeed = -11.5
 					self.stand=False
