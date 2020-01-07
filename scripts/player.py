@@ -76,9 +76,6 @@ class Player(pygame.sprite.Sprite):
 				diff = ifloor.top - self.rect.bottom
 				if diff >= 0 and diff_min > diff:
 					diff_min = diff'''
-		k= pygame.time.get_ticks()
-
-		b= pygame.time.get_ticks()+1
 
 		if len(floor_list)==5:
 			if  pygame.Rect.colliderect(self.rect, floor_list[0]):
@@ -146,34 +143,38 @@ class Player(pygame.sprite.Sprite):
 
 
 		for enemy in enemy_group:
-
+			if 20>abs(self.rect.bottom-enemy.rect.top)>10 and pygame.Rect.colliderect(self.rect, enemy) :
+					self.attack=True
+					self.jump()
+					self.invincible=30
 			if pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0:
 				if 0<=abs(self.rect.bottom-enemy.rect.bottom)<=20:				
 					self.life -= 1
+					self.invincible=200
+			if self.invincible>0:
 					self.coll()
-					self.invincible=300
-				elif 20>abs(self.rect.bottom-enemy.rect.top)>10: 
-					self.attack=True
-					self.jump()
-					self.invincible=500
 
-			if self.invincible>=0:
-				self.invincible+=(k-b)
-				if self.invincible<=0:
-					self.stage_start()
-                                        
-			
+	def coll (self):
+			k= pygame.time.get_ticks()
 
+			b= pygame.time.get_ticks()+1
 
-
+			if self.invincible>150:
+					self.invincible+=(k-b)
+					image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
+					self.surf  = pygame.transform.scale(image, (60, 90))
+			elif self.invincible>30:
+					self.invincible+=(k-b)
+					image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_very_strong.png'))
+					self.surf  = pygame.transform.scale(image, (60, 90))
+			else :
+					self.invincible+=(k-b)
+					image = pygame.image.load(os.path.join("img", "main", 'role_KoreaFish.png'))
+					self.surf  = pygame.transform.scale(image, (60, 90))
+				
 
 				
-		
-
-	def coll(self):
-		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
-		self.surf  = pygame.transform.scale(image, (60, 90))
-
+				
 
 	def move_left_right(self, pressed_keys):
 		""""""
@@ -208,7 +209,7 @@ class Player(pygame.sprite.Sprite):
 		if self.attack==False:
 			self.yspeed = -15
 		else :
-			self.yspeed =-30
+			self.yspeed =-150
 			self.attack =False
 		self.jumping()
 	def jumping(self):
