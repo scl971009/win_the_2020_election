@@ -2,7 +2,7 @@ import sys
 import pygame  
 import os
 from pygame.locals import *
-initial_pos_list = [[(190, 465), (190, 465), (190, 465), (190, 465), (190, 465)]]
+initial_pos_list = [[(490, 465), (490, 465), (490, 465), (490, 465), (490, 465)]]
 vec = pygame.math.Vector2
 
 class Player(pygame.sprite.Sprite):
@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
 		#todo: change character image to the right character (current: black)
 		super(Player, self).__init__()
 
-		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
+		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
 		self.surf  = pygame.transform.scale(image, (60, 90))
 
 		self.rect = self.surf.get_rect()
@@ -33,7 +33,11 @@ class Player(pygame.sprite.Sprite):
 		self.yspeed = 0                                 # 垂直速度
 		self.aspeed = 0.5                               # 加速度
 		self.stand=True
-		self.fall=False
+		self.attack=False
+		self.last=pygame.time.get_ticks()
+		self.invincible=0
+
+
 
 
 
@@ -71,36 +75,73 @@ class Player(pygame.sprite.Sprite):
 				diff = ifloor.top - self.rect.bottom
 				if diff >= 0 and diff_min > diff:
 					diff_min = diff'''
+		a= pygame.time.get_ticks()
 
+		b= pygame.time.get_ticks()+1
 
-		if  pygame.Rect.colliderect(self.rect, floor_list[0]):
-			a=(self.rect.bottom-floor_list[0].top)
-			if 0<=self.rect.bottom-floor_list[0].top<15:
-					self.stand=True
-					self.rect.move_ip(0,-a)
-		elif  pygame.Rect.colliderect(self.rect, floor_list[1]):
-			a=(self.rect.bottom-floor_list[1].top)
-			if 0<=self.rect.bottom-floor_list[1].top<15:
-					self.stand=True
-					self.rect.move_ip(0,-a)
-		elif  pygame.Rect.colliderect(self.rect, floor_list[2]):
-			a=(self.rect.bottom-floor_list[2].top)
-			if 0<=self.rect.bottom-floor_list[2].top<15:
-					self.stand=True
-					self.rect.move_ip(0,-a)
-		elif  pygame.Rect.colliderect(self.rect, floor_list[3]):
-			a=(self.rect.bottom-floor_list[3].top)
-			if 0<=self.rect.bottom-floor_list[3].top<15:
-					self.stand=True
-					self.rect.move_ip(0,-a)
-		elif  pygame.Rect.colliderect(self.rect, floor_list[4]):
-			a=(self.rect.bottom-floor_list[4].top)
-			if 0<=self.rect.bottom-floor_list[4].top<15:
-					self.stand=True
-					self.rect.move_ip(0,-a)
-		else:
-					self.yspeed = -11.5
-					self.stand=False
+		if len(floor_list)==5:
+			if  pygame.Rect.colliderect(self.rect, floor_list[0]):
+				a=(self.rect.bottom-floor_list[0].top)
+				if 0<=self.rect.bottom-floor_list[0].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[1]):
+				a=(self.rect.bottom-floor_list[1].top)
+				if 0<=self.rect.bottom-floor_list[1].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[2]):
+				a=(self.rect.bottom-floor_list[2].top)
+				if 0<=self.rect.bottom-floor_list[2].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[3]):
+				a=(self.rect.bottom-floor_list[3].top)
+				if 0<=self.rect.bottom-floor_list[3].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[4]):
+				a=(self.rect.bottom-floor_list[4].top)
+				if 0<=self.rect.bottom-floor_list[4].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			else:
+						self.yspeed = -11.5
+						self.stand=False
+		elif len(floor_list)==6:
+			if  pygame.Rect.colliderect(self.rect, floor_list[0]):
+				a=(self.rect.bottom-floor_list[0].top)
+				if 0<=self.rect.bottom-floor_list[0].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[1]):
+				a=(self.rect.bottom-floor_list[1].top)
+				if 0<=self.rect.bottom-floor_list[1].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[2]):
+				a=(self.rect.bottom-floor_list[2].top)
+				if 0<=self.rect.bottom-floor_list[2].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[3]):
+				a=(self.rect.bottom-floor_list[3].top)
+				if 0<=self.rect.bottom-floor_list[3].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+			elif  pygame.Rect.colliderect(self.rect, floor_list[4]):
+				a=(self.rect.bottom-floor_list[4].top)
+				if 0<=self.rect.bottom-floor_list[4].top<15:
+						self.stand=True
+						self.rect.move_ip(0,-a)
+
+			elif  pygame.Rect.colliderect(self.rect, floor_list[5]):
+				a=(self.rect.bottom-floor_list[5].top)
+				if 0<=self.rect.bottom-floor_list[5].top<15:
+						self.stand=True
+			else:
+						self.yspeed = -11.5
+						self.stand=False
 
 				
 
@@ -113,103 +154,35 @@ class Player(pygame.sprite.Sprite):
 
                      
 		
-		diff_min=100000
+
 		for enemy in enemy_group:
-			if pygame.Rect.colliderect(self.rect, enemy)and self.rect.centery > enemy.rect.centery:
-				
-					print('coll')
+
+			if pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0:
+				if 0<=abs(self.rect.bottom-enemy.rect.bottom)<=60:				
 					self.life -= 1
-					self.stage_start()
 					self.coll()
-
-
-
-					
-
-
-			
-		'''alpha=self.rect[0]-ifloor.left
-			beta=self.rect[1]-ifloor.top
-			print(alpha,beta)
-			if pygame.Rect.colliderect(self.rect, ifloor) :
-
-				self.stand=True
-			else:
-
-				self.stand==False'''
-				
-		'''for ifloor in floor_list:                 
-			if pygame.Rect.colliderect(self.rect, ifloor) :
-
-				self.stand=True
-			else:
-
-				self.stand==False  
-			print(self.rect[0]-ifloor.left)'''
-			
-		'''
-		for ifloor in floor_list:			
-
-			if ifloor.left <= self.rect.left and ifloor.right >= self.rect.right:
-                                
-				diff = ifloor.top - self.rect.bottom
-				diff2= ifloor.bottom - self.rect.top
-
-				if diff >= 0  and diff_min > diff :
-					self.stand=False
-
+					self.invincible=300
 				else:
-					self.stand=True'''
+					self.attack=True
+					self.jump()
+					self.invincible=300
+
+			if self.invincible>=0:
+
+				self.invincible+=(a-b)
 
 
 
 
+				
+			
 
 
-		"""
-		This function will be called in the main loop. Simulate collision with floor and enemy and gravity.
-		hint: How to deal with enemy_group: pygame.sprite.spritecollideany
 
-		arg:
-			floot_list: the list of all floor (rect) in this stage.
-			enemy_group: all enemy's data
-		"""
 
-		"""換個方法寫self.acc = vec(0, PLAYER_GRAV )
-		keys = pygame.key.get_pressed()
-		if keys[pygame.K_LEFT]:
-			self.acc.x = -PLAYER_ACC
-		if keys[pygame.K_RIGHT]:
-			self.acc.x = PLAYER_ACC
-
-        # 获得加速度
-		self.acc.x += self.vel.x * PLAYER_FRICTION
-        # 速度与加速度
-		self.vel += self.acc
-        # 如果速度小于0.1，则速度为0（比如这样设置，不然速度永远无法0）
-		if abs(self.vel.x) < 0.1:
-			self.vel.x = 0
-		self.pos += self.vel + 0.5 * self.acc
-        # wrap around the sides of the screen
-		if self.pos.x > WIDTH:
-			self.pos.x = 0
-		if self.pos.x < 0:
-			self.pos.x = WIDTH
-# 有初始的加速度 - 玩家没有在平台上就会掉落
+				
 		
-		#floor part
 
-		#if not colliding any floor:
-			#move down (not constant velocity)
-
-		#enemy part
-
-		#if collides with enemy:
-			#if attacks enemy:
-				#simulate collision with enemy (maybe move up after collision)
-			#else (attacked by enemy):
-				#lose 1 life and sent back to the initial position
-		pass"""
 	def coll(self):
 		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
 		self.surf  = pygame.transform.scale(image, (60, 90))
@@ -249,7 +222,11 @@ class Player(pygame.sprite.Sprite):
 	def jump(self):
 
                 #todo: jump when K_UP is pressed (should not just simply plus y position)
-		self.yspeed = -15
+		if self.attack==False:
+			self.yspeed = -15
+		else :
+			self.yspeed =-30
+			self.attack =False
 		self.jumping()
 	def jumping(self):
 		self.rect.move_ip(self.xspeed,self.yspeed)        
