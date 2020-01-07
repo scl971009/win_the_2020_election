@@ -1,4 +1,5 @@
 import sys
+
 import pygame  
 import os
 from pygame.locals import *
@@ -75,7 +76,7 @@ class Player(pygame.sprite.Sprite):
 				diff = ifloor.top - self.rect.bottom
 				if diff >= 0 and diff_min > diff:
 					diff_min = diff'''
-		a= pygame.time.get_ticks()
+		k= pygame.time.get_ticks()
 
 		b= pygame.time.get_ticks()+1
 
@@ -143,38 +144,24 @@ class Player(pygame.sprite.Sprite):
 						self.yspeed = -11.5
 						self.stand=False
 
-				
-
-				
-
-					
-
-
-
-
-                     
-		
 
 		for enemy in enemy_group:
 
 			if pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0:
-				if 0<=abs(self.rect.bottom-enemy.rect.bottom)<=60:				
+				if 0<=abs(self.rect.bottom-enemy.rect.bottom)<=20:				
 					self.life -= 1
 					self.coll()
 					self.invincible=300
-				else:
+				elif 20>abs(self.rect.bottom-enemy.rect.top)>10: 
 					self.attack=True
 					self.jump()
-					self.invincible=300
+					self.invincible=500
 
 			if self.invincible>=0:
-
-				self.invincible+=(a-b)
-
-
-
-
-				
+				self.invincible+=(k-b)
+				if self.invincible<=0:
+					self.stage_start()
+                                        
 			
 
 
@@ -187,6 +174,7 @@ class Player(pygame.sprite.Sprite):
 		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
 		self.surf  = pygame.transform.scale(image, (60, 90))
 
+
 	def move_left_right(self, pressed_keys):
 		""""""
 
@@ -195,18 +183,13 @@ class Player(pygame.sprite.Sprite):
 			self.rect.move_ip(-5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-
-
-
 		if pressed_keys[K_RIGHT] and self.rect[0]<750  :	
 			self.rect.move_ip(5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-
 		if pressed_keys[K_UP] :
 			self.stand=False
-			self.jump()
-	
+			self.jump()	
 		if (not pressed_keys[K_UP]) and self.stand==False  :
 			self.yspeed = -11.5
 			self.grav()
