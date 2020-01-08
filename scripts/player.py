@@ -188,9 +188,7 @@ class Player(pygame.sprite.Sprite):
 			self.rect.move_ip(5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-		if pressed_keys[K_UP] :
-			self.stand=False
-			self.jump()	
+
 		if (not pressed_keys[K_UP]) and self.stand==False  :
 			self.yspeed = -11.5
 			self.grav()
@@ -206,8 +204,9 @@ class Player(pygame.sprite.Sprite):
 	def jump(self):
 
                 #todo: jump when K_UP is pressed (should not just simply plus y position)
+		self.stand=False
 		if self.attack==False:
-			self.yspeed = -15
+			self.yspeed =-200
 		else :
 			self.yspeed =-150
 			self.attack =False
