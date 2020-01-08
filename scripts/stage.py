@@ -112,10 +112,10 @@ def stage01(window_surface, background, material_amount, player):
 	player.stage_start()
 	
 	floor = pygame.Rect(0, 555, 800, 45)
-	block1 = pygame.Rect(115, 120, 85, 30)
-	block2 = pygame.Rect(520, 125, 60, 25)
+	block1 = pygame.Rect(115, 125, 185, 25)
+	block2 = pygame.Rect(520, 125, 160, 25)
 	block3 = pygame.Rect(310, 260, 400, 30)
-	block4 = pygame.Rect(120, 390, 160, 30)
+	block4 = pygame.Rect(120, 395, 160, 30)
 	floor_list = []
 	floor_list.append(floor)
 	floor_list.append(block1)
@@ -137,12 +137,12 @@ def stage02(window_surface, background, material_amount, player):
 	"""stage 3 for korea fish"""
 	player.stage_start()
 	
-	floor = pygame.Rect(0, 0, 0, 0)
-	block1 = pygame.Rect(0, 0, 0, 0)
-	block2 = pygame.Rect(0, 0, 0, 0)
-	block3 = pygame.Rect(0, 0, 0, 0)
-	block4 = pygame.Rect(0, 0, 0, 0)
-	block5 = pygame.Rect(0, 0, 0, 0)
+	floor = pygame.Rect(0, 555, 800, 45)
+	block1 = pygame.Rect(120, 125, 165, 30)
+	block2 = pygame.Rect(505, 125, 160, 30)
+	block3 = pygame.Rect(205, 260, 360, 30)
+	block4 = pygame.Rect(125, 400, 155, 30)
+	block5 = pygame.Rect(510, 395, 155, 35)
 	floor_list = []
 	floor_list.append(floor)
 	floor_list.append(block1)
@@ -158,7 +158,7 @@ def stage02(window_surface, background, material_amount, player):
 	enemy4 = Enemy(0, 2, 4)
 	enemy_group = pygame.sprite.Group()
 	enemy_group.add(enemy0)
-	enemy_group.add(enemy1)
+	nemy_group.add(enemy1)
 	enemy_group.add(enemy2)
 	enemy_group.add(enemy3)
 	enemy_group.add(enemy4)
@@ -169,11 +169,11 @@ def stage03(window_surface, background, material_amount, player):
 	"""stage 4 for korea fish"""
 	player.stage_start()
 	
-	floor = pygame.Rect(0, 0, 0, 0)
-	block1 = pygame.Rect(0, 0, 0, 0)
-	block2 = pygame.Rect(0, 0, 0, 0)
-	block3 = pygame.Rect(0, 0, 0, 0)
-	block4 = pygame.Rect(0, 0, 0, 0)
+	floor = pygame.Rect(0, 555, 800, 45)
+	block1 = pygame.Rect(65, 145, 165, 10)
+	block2 = pygame.Rect(560, 145, 180, 10)
+	block3 = pygame.Rect(230, 280, 335, 15)
+	block4 = pygame.Rect(330, 410, 140, 15)
 	floor_list = []
 	floor_list.append(floor)
 	floor_list.append(block1)
@@ -195,12 +195,12 @@ def stage04(window_surface, background, material_amount, player):
 	"""stage 5 for korea fish"""
 	player.stage_start()
 	
-	floor = pygame.Rect(0, 0, 0, 0)
-	block1 = pygame.Rect(0, 0, 0, 0)
-	block2 = pygame.Rect(0, 0, 0, 0)
-	block3 = pygame.Rect(0, 0, 0, 0)
-	block4 = pygame.Rect(0, 0, 0, 0)
-	block5 = pygame.Rect(0, 0, 0, 0)
+	floor = pygame.Rect(0, 555, 800, 45)
+	block1 = pygame.Rect(285, 115, 230, 25)
+	block2 = pygame.Rect(50, 265, 250, 25)
+	block3 = pygame.Rect(510, 260, 230, 25)
+	block4 = pygame.Rect(155, 405, 135, 30)
+	block5 = pygame.Rect(515, 400, 145, 30)
 	floor_list = []
 	floor_list.append(floor)
 	floor_list.append(block1)
