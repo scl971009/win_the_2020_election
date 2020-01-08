@@ -244,6 +244,7 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
         elif op_ed == 1 and level == 4:
              intelude_BG(window_surface,"img","intelude","korean_4_ed.png")
              click_continue_line(window_surface)
+             pygame.display.update()
 
              line_pos_2 = 150
              final_text_size = 18

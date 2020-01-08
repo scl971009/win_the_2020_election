@@ -158,7 +158,7 @@ def stage02(window_surface, background, material_amount, player):
 	enemy4 = Enemy(0, 2, 4)
 	enemy_group = pygame.sprite.Group()
 	enemy_group.add(enemy0)
-	nemy_group.add(enemy1)
+	enemy_group.add(enemy1)
 	enemy_group.add(enemy2)
 	enemy_group.add(enemy3)
 	enemy_group.add(enemy4)
