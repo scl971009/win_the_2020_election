@@ -52,6 +52,8 @@ def action(character, level, window_surface, player, background, material_amount
 			elif event.type == KEYDOWN:
 				if event.key == K_SPACE:
 					pause(window_surface)
+				elif event.key == K_UP:
+					player.jump()
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
