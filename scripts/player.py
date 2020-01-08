@@ -3,7 +3,7 @@ import sys
 import pygame  
 import os
 from pygame.locals import *
-initial_pos_list = [[(490, 465), (490, 465), (490, 465), (490, 465), (490, 465)]]
+initial_pos_list = [[(590, 465), (590, 465), (590, 465), (590, 465), (590, 465)]]
 vec = pygame.math.Vector2
 
 class Player(pygame.sprite.Sprite):
@@ -15,12 +15,20 @@ class Player(pygame.sprite.Sprite):
 		"""
 		#todo: change character image to the right character (current: black)
 		super(Player, self).__init__()
+		self.image_R = pygame.image.load(os.path.join("img","main", 'KoreaFish_turnRight.png'))
+		self.image_L = pygame.image.load(os.path.join("img","main", 'KoreaFish_turnLeft.png'))
+		self.image_H = pygame.image.load(os.path.join("img","main", 'KoreaFish_hurt.png'))
+		self.image_jumpR = pygame.image.load(os.path.join("img","main", 'KoreaFish_Right_jump.png'))
+		self.image_jumpL = pygame.image.load(os.path.join("img","main", 'KoreaFish_left_jump.png'))
+		self.image_invR = pygame.image.load(os.path.join("img","main", 'KoreaFish_R_strong.png'))
+		self.image_invL = pygame.image.load(os.path.join("img","main", 'KoreaFish_L_strong.png'))
+		self.image_invjumpR = pygame.image.load(os.path.join("img","main", 'KoreaFish_Rjump_strong.png'))
+		self.image_invjumpL = pygame.image.load(os.path.join("img","main", 'KoreaFish_Ljump_strong.png'))
+		self.image_normal = pygame.image.load(os.path.join("img","main", 'role_KoreaFish.png'))
+		self.image_invnormal = pygame.image.load(os.path.join("img","main", 'KoreaFish_very_strong.png'))
 
-		image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
-		self.surf  = pygame.transform.scale(image, (60, 90))
-
+		self.surf  = pygame.transform.scale(self.image_L, (60, 90))
 		self.rect = self.surf.get_rect()
-
 		#self.rect = self.surf.get_rect(topleft = (x, y))
 		self.character = character
 		self.life = 5
@@ -38,48 +46,16 @@ class Player(pygame.sprite.Sprite):
 		self.last=pygame.time.get_ticks()
 		self.invincible=0
 		self.h=0
-
-
-
-
-
-		
-			
-
-
-
-
 	def stage_start(self):
 		self.rect = self.surf.get_rect(topleft = initial_pos_list[self.character][self.stage])
-
+		self.h=0
 	def stage_clear(self):
+		self.surf  = pygame.transform.scale(self.image_L, (60, 90))
 		self.stage = self.stage + 1
 		self.life = 5
-
-
-
-					
-					
-			
-					                
-                
-
-
-
 	def update(self,floor_list, enemy_group):
 		if self.stand==True:
 			self.h=0
-
-		
-		'''for ifloor in floor_list:
-
-			diff_min = 100000
-
-			if ifloor.left <= self.rect.center[0] and ifloor.right >= self.rect.center[0]:
-				diff = ifloor.top - self.rect.bottom
-				if diff >= 0 and diff_min > diff:
-					diff_min = diff'''
-
 		if len(floor_list)==5:
 			if  pygame.Rect.colliderect(self.rect, floor_list[0]):
 				a=(self.rect.bottom-floor_list[0].top)
@@ -164,33 +140,27 @@ class Player(pygame.sprite.Sprite):
 
 			if self.invincible>150:
 					self.invincible+=(k-b)
-					image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_hurt.png'))
-					self.surf  = pygame.transform.scale(image, (60, 90))
+					self.surf  = pygame.transform.scale(self.image_H, (60, 90))
 			elif self.invincible>30:
 					self.invincible+=(k-b)
-					image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_very_strong.png'))
-					self.surf  = pygame.transform.scale(image, (60, 90))
-			else :
+					self.surf  = pygame.transform.scale(self.image_invnormal, (60, 90))
+			elif self.invincible>0:
 					self.invincible+=(k-b)
-					image = pygame.image.load(os.path.join("img", "main", 'role_KoreaFish.png'))
-					self.surf  = pygame.transform.scale(image, (60, 90))
+					self.surf  = pygame.transform.scale(self.image_normal, (60, 90))
 				
 
 				
 				
 
 	def move_left_right(self, pressed_keys):
-		""""""
 
 		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT] and self.rect[0]>0  :
 			self.rect.move_ip(-5, 0)
-			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnLeft.png'))
-			self.surf  = pygame.transform.scale(image, (60, 90))
+			self.surf  = pygame.transform.scale(self.image_L, (60, 90))
 		if pressed_keys[K_RIGHT] and self.rect[0]<750  :	
 			self.rect.move_ip(5, 0)
-			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
-			self.surf  = pygame.transform.scale(image, (60, 90))
+			self.surf  = pygame.transform.scale(self.image_R, (60, 90))
 		if pressed_keys[K_UP] and self.h<=20:
 			self.stand=False
 			self.h+=1
@@ -199,11 +169,9 @@ class Player(pygame.sprite.Sprite):
 			self.yspeed = -11.5
 			self.grav()
 		if pressed_keys[K_UP] and pressed_keys[K_RIGHT]:
-			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_right_jump.png'))
-			self.surf  = pygame.transform.scale(image, (60, 90))
+			self.surf  = pygame.transform.scale(self.image_jumpR, (60, 90))
 		if pressed_keys[K_UP] and pressed_keys[K_LEFT]:
-			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_left_jump.png'))
-			self.surf  = pygame.transform.scale(image, (60, 90))
+			self.surf  = pygame.transform.scale(self.image_jumpL, (60, 90))
 
 
 
