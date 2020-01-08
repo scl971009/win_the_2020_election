@@ -54,9 +54,10 @@ class Player(pygame.sprite.Sprite):
 		self.stage = self.stage + 1
 		self.life = 5
 	def update(self,floor_list, enemy_group):
+		print(self.stand,self.h)
 		if self.stand==True:
 			self.h=0
-		if len(floor_list)==5:
+		if len(floor_list)==5 or self.h==21:
 			if  pygame.Rect.colliderect(self.rect, floor_list[0]):
 				a=(self.rect.bottom-floor_list[0].top)
 				if 0<=self.rect.bottom-floor_list[0].top<15:
@@ -85,7 +86,7 @@ class Player(pygame.sprite.Sprite):
 			else:
 						self.yspeed = -11.5
 						self.stand=False
-		elif len(floor_list)==6:
+		elif len(floor_list)==6 or self.h==21:
 			if  pygame.Rect.colliderect(self.rect, floor_list[0]):
 				a=(self.rect.bottom-floor_list[0].top)
 				if 0<=self.rect.bottom-floor_list[0].top<15:
