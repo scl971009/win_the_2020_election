@@ -37,6 +37,7 @@ class Player(pygame.sprite.Sprite):
 		self.attack=False
 		self.last=pygame.time.get_ticks()
 		self.invincible=0
+		self.h=0
 
 
 
@@ -66,6 +67,8 @@ class Player(pygame.sprite.Sprite):
 
 
 	def update(self,floor_list, enemy_group):
+		if self.stand==True:
+			self.h=0
 
 		
 		'''for ifloor in floor_list:
@@ -188,7 +191,10 @@ class Player(pygame.sprite.Sprite):
 			self.rect.move_ip(5, 0)
 			image = pygame.image.load(os.path.join("img", "main", 'KoreaFish_turnRight.png'))
 			self.surf  = pygame.transform.scale(image, (60, 90))
-
+		if pressed_keys[K_UP] and self.h<=20:
+			self.stand=False
+			self.h+=1
+			self.jump()
 		if (not pressed_keys[K_UP]) and self.stand==False  :
 			self.yspeed = -11.5
 			self.grav()
@@ -203,14 +209,14 @@ class Player(pygame.sprite.Sprite):
 
 	def jump(self):
 
-                #todo: jump when K_UP is pressed (should not just simply plus y position)
-		self.stand=False
-		if self.attack==False:
-			self.yspeed =-200
-		else :
-			self.yspeed =-150
-			self.attack =False
-		self.jumping()
+                #todo: jump when K_UP is pressed (should not just simply plus y position
+		if self.h<15:
+			if self.attack==False:
+				self.yspeed = -15
+			else :
+				self.yspeed =-150
+				self.attack =False
+			self.jumping()
 	def jumping(self):
 		self.rect.move_ip(self.xspeed,self.yspeed)        
 		self.yspeed = self.yspeed + self.aspeed
