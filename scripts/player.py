@@ -195,7 +195,7 @@ class Player(pygame.sprite.Sprite):
 			self.stand=False
 			self.h+=1
 			self.jump()
-		if (not pressed_keys[K_UP]) and self.stand==False  :
+		if( (not pressed_keys[K_UP]) and self.stand==False)or self.h>20  :
 			self.yspeed = -11.5
 			self.grav()
 		if pressed_keys[K_UP] and pressed_keys[K_RIGHT]:
