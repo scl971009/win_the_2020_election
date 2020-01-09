@@ -54,7 +54,6 @@ class Player(pygame.sprite.Sprite):
 		self.stage = self.stage + 1
 		self.life = 5
 	def update(self,floor_list, enemy_group):
-		print(self.stand,self.h)
 		if self.stand==True:
 			self.h=0
 		if len(floor_list)==5 or self.h==21:
@@ -123,12 +122,12 @@ class Player(pygame.sprite.Sprite):
 
 
 		for enemy in enemy_group:
-			enemy.b_stop
-			if 20>abs(self.rect.bottom-enemy.rect.top)>10 and pygame.Rect.colliderect(self.rect, enemy) :
+			if enemy.b_stop==True and pygame.Rect.colliderect(self.rect, enemy) :
+					self.h=10
 					self.attack=True
 					self.jump()
 					self.invincible=30
-			if pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0:
+			if pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0 and enemy.b_stop==False:
 				if 0<=abs(self.rect.bottom-enemy.rect.bottom)<=20:				
 					self.life -= 1
 					self.invincible=200
@@ -184,7 +183,7 @@ class Player(pygame.sprite.Sprite):
 			if self.attack==False:
 				self.yspeed = -15
 			else :
-				self.yspeed =-150
+				self.yspeed =-100
 				self.attack =False
 			self.jumping()
 	def jumping(self):
