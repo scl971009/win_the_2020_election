@@ -224,7 +224,8 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
                 self.behavior1(move_step, floor1)
 
     def is_stop(self):
-        return b_stop
+        """if enemy stops, player won't be hurt."""
+        return self.b_stop
 
     def get_surf(self):
         return self.surf
