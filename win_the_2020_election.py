@@ -91,6 +91,7 @@ def choose_player(window_surface, background):
 						return 0
 
 def fail(window_surface):
+	"""handle game over situation and return if user clicks GO HOME btn"""
 	#print("into fail")
 	background = pygame.image.load(os.path.join("img","else","fail.png"))
 	background = pygame.transform.scale(background, (800, 600))

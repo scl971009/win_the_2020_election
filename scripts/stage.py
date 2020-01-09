@@ -7,6 +7,7 @@ from scripts.enemy import Enemy
 from scripts.material import Material
 
 def set_life(num):
+	"""show current life at the bottom of game scene"""
 	# life = pygame.image.load("img\\stage\\" + str(num) + ".png")
 	life = pygame.image.load(os.path.join("img", "stage", str(num) + ".png"))
 
@@ -14,6 +15,7 @@ def set_life(num):
 	return life
 
 def pause(window_surface):
+	"""pause when user press space key, press space key again to resume game"""
 	pause = pygame.image.load(os.path.join("img","else","pause.png"))
 	pause = pygame.transform.scale(pause, (800, 600))
 	pause.convert()
@@ -32,6 +34,23 @@ def pause(window_surface):
 
 
 def action(character, level, window_surface, player, background, material_amount, floor_list, enemy_group):
+	"""
+	the main loop of each stage
+
+	argv:
+		character: player number (0 for korea fish)
+		level: which level is running (for calling material)
+		window_surface: the window_surface to draw scene
+		player: the player object
+		background: brackground image
+		material_amount: how many materials are there in this stage
+		floor_list: a list of floors in this stage for player and enemy to detect collision with floor
+		enemy_group: sprite group contains all enemys
+
+	Return value:
+		True: pass the stage
+		False: game over
+	"""
 	material_num = 0
 	material = Material(character, level, material_num)
 	while True:
@@ -229,6 +248,10 @@ def start(window_surface, character, level, player):
 		window_surface: the window_surface to draw scene
 		character: whose stage to generate
 		level: which level of this character's game
+
+	Return value:
+		True: pass the stage
+		False: game over
 	"""
 	#path = "img\\material\\material_location\\stage" + str(level + 1) + "_mateial_location.png"
 	# path = "img\\stage\\stage" + str(character) + str(level) + "_all.png"
@@ -273,8 +296,8 @@ class Stage():
 		"""
 		Return the result of this stage
 
-		return value:
-			True for success
-			False for fail
+		Return value:
+			True: pass the stage
+			False: game over
 		"""
 		return self.success

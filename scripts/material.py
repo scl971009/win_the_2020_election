@@ -27,7 +27,9 @@ class Material(pygame.sprite.Sprite):
 		self.number = number
 
 	def get_rect(self):
+		"""return material's rect"""
 		return self.rect
 
 	def get_surf(self):
+		"""return material's surf"""
 		return self.surf
