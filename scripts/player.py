@@ -127,10 +127,10 @@ class Player(pygame.sprite.Sprite):
 					self.attack=True
 					self.jump()
 					self.invincible=30
-			if pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0 and enemy.b_stop==False:
-				if 0<=abs(self.rect.bottom-enemy.rect.bottom)<=20:				
+			elif pygame.Rect.colliderect(self.rect, enemy) and self.invincible<=0 and enemy.b_stop==False:
+				
 					self.life -= 1
-					self.invincible=200
+					self.invincible=500
 			if self.invincible>0:
 					self.coll()
 
@@ -139,12 +139,12 @@ class Player(pygame.sprite.Sprite):
 
 			b= pygame.time.get_ticks()+1
 
-			if self.invincible>150:
+			if self.invincible>300:
 					self.invincible+=(k-b)
 					self.surf  = pygame.transform.scale(self.image_H, (60, 90))
 			elif self.invincible>30:
 					self.invincible+=(k-b)
-					self.surf  = pygame.transform.scale(self.image_invnormal, (60, 90))
+
 			elif self.invincible>0:
 					self.invincible+=(k-b)
 					self.surf  = pygame.transform.scale(self.image_normal, (60, 90))
@@ -159,21 +159,33 @@ class Player(pygame.sprite.Sprite):
 		if pressed_keys[K_LEFT] and self.rect[0]>0  :
 			self.rect.move_ip(-5, 0)
 			self.surf  = pygame.transform.scale(self.image_L, (60, 90))
+			if 300>self.invincible>30:
+				self.surf  = pygame.transform.scale(self.image_invL, (60, 90))
 		if pressed_keys[K_RIGHT] and self.rect[0]<750  :	
 			self.rect.move_ip(5, 0)
 			self.surf  = pygame.transform.scale(self.image_R, (60, 90))
+			if 300>self.invincible>30:
+				self.surf  = pygame.transform.scale(self.image_invR, (60, 90))
 		if pressed_keys[K_UP] and self.h<=20:
 			self.stand=False
 			self.h+=1
+
 			self.jump()
+
 		if( (not pressed_keys[K_UP]) and self.stand==False)or self.h>20  :
 			self.yspeed = -11.5
 			self.grav()
 		if pressed_keys[K_UP] and pressed_keys[K_RIGHT]:
 			self.surf  = pygame.transform.scale(self.image_jumpR, (60, 90))
+			if 300>self.invincible>30:
+				self.surf  = pygame.transform.scale(self.image_invjumpR, (60, 90))
+
 		if pressed_keys[K_UP] and pressed_keys[K_LEFT]:
 			self.surf  = pygame.transform.scale(self.image_jumpL, (60, 90))
-
+			if 300>self.invincible>30:
+				self.surf  = pygame.transform.scale(self.image_invjumpL, (60, 90))
+		if 301>self.invincible>30 and not (pressed_keys[K_LEFT] or pressed_keys[K_RIGHT]):
+			self.surf  = pygame.transform.scale(self.image_invnormal, (60, 90))
 
 
 	def jump(self):
