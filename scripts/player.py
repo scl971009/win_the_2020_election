@@ -8,11 +8,7 @@ vec = pygame.math.Vector2
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self, character):
-		"""
-		arg:
-			character: player number (0 for korea fish)
-			[x, y]: initial position
-		"""
+		"""set initial parameters store images,speed,height .etc"""
 		#todo: change character image to the right character (current: black)
 		super(Player, self).__init__()
 		self.image_R = pygame.image.load(os.path.join("img","main", 'KoreaFish_turnRight.png'))
@@ -36,8 +32,7 @@ class Player(pygame.sprite.Sprite):
 		#maybe you will need force and speed as variable... (I'm not sure. It depends on how you implement jump and gravity.)
 		#I think you might need to save initail position in case player is attacked by enemys
 		self.rect.center = (60/ 2,  90/ 45)
-		self.pos = vec(60/ 2,90/ 2)
-		
+		self.pos = vec(60/ 2,90/ 2)		
 		self.xspeed = 0                                 # 水平速度
 		self.yspeed = 0                                 # 垂直速度
 		self.aspeed = 0.5                               # 加速度
@@ -47,13 +42,20 @@ class Player(pygame.sprite.Sprite):
 		self.invincible=0
 		self.h=0
 	def stage_start(self):
+		'''start'''
 		self.rect = self.surf.get_rect(topleft = initial_pos_list[self.character][self.stage])
 		self.h=0
 	def stage_clear(self):
+		'''stage clear and reset life'''
 		self.surf  = pygame.transform.scale(self.image_L, (60, 90))
 		self.stage = self.stage + 1
 		self.life = 5
 	def update(self,floor_list, enemy_group):
+		'''check every frame and judge may or may not change
+			whether Player on the floor
+			censor height,stand,floor amount.
+
+		'''
 		if self.stand==True:
 			self.h=0
 		if len(floor_list)==5 or self.h==21:
@@ -119,6 +121,8 @@ class Player(pygame.sprite.Sprite):
 			else:
 						self.yspeed = -11.5
 						self.stand=False
+		'''confirm whether Player and enemies collide or not
+		if enemy press by Player rectangle the main character will jump '''
 
 
 		for enemy in enemy_group:
@@ -135,27 +139,27 @@ class Player(pygame.sprite.Sprite):
 					self.coll()
 
 	def coll (self):
-			k= pygame.time.get_ticks()
+		'''will be call if Player collide with enemy and give Player a period of invincible time'''
+		k= pygame.time.get_ticks()
 
-			b= pygame.time.get_ticks()+1
+		b= pygame.time.get_ticks()+1
 
-			if self.invincible>300:
-					self.invincible+=(k-b)
-					self.surf  = pygame.transform.scale(self.image_H, (60, 90))
-			elif self.invincible>30:
-					self.invincible+=(k-b)
-
-			elif self.invincible>0:
-					self.invincible+=(k-b)
-					self.surf  = pygame.transform.scale(self.image_normal, (60, 90))
+		if self.invincible>300:
+				self.invincible+=(k-b)
+				self.surf  = pygame.transform.scale(self.image_H, (60, 90))
+		elif self.invincible>30:
+				self.invincible+=(k-b)
+		elif self.invincible>0:
+				self.invincible+=(k-b)
+				self.surf  = pygame.transform.scale(self.image_normal, (60, 90))
 				
 
 				
 				
 
 	def move_left_right(self, pressed_keys):
+		'''character move and alter images according to time , press key , height .etc'''
 
-		#todo: move when left, right is pressed (remember to set bounds)
 		if pressed_keys[K_LEFT] and self.rect[0]>0  :
 			self.rect.move_ip(-5, 0)
 			self.surf  = pygame.transform.scale(self.image_L, (60, 90))
@@ -169,9 +173,8 @@ class Player(pygame.sprite.Sprite):
 		if pressed_keys[K_UP] and self.h<=20:
 			self.stand=False
 			self.h+=1
-
 			self.jump()
-
+			'''constraint jump height'''
 		if( (not pressed_keys[K_UP]) and self.stand==False)or self.h>20  :
 			self.yspeed = -11.5
 			self.grav()
@@ -189,8 +192,7 @@ class Player(pygame.sprite.Sprite):
 
 
 	def jump(self):
-
-                #todo: jump when K_UP is pressed (should not just simply plus y position
+		'''jump when K_UP is pressed'''
 		if self.h<15:
 			if self.attack==False:
 				self.yspeed = -15
@@ -199,10 +201,11 @@ class Player(pygame.sprite.Sprite):
 				self.attack =False
 			self.jumping()
 	def jumping(self):
+		'''concept similar to gravity'''
 		self.rect.move_ip(self.xspeed,self.yspeed)        
 		self.yspeed = self.yspeed + self.aspeed
 	def grav(self):
-		self.fall=True
+		'''automatic move down if character not stand on floor'''
 		if self.rect[1]<465  :
 			self.rect.move_ip(self.xspeed,-self.yspeed)        
 			self.yspeed = -(self.yspeed + self.aspeed)
