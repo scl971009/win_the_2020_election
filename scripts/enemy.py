@@ -10,7 +10,7 @@ initial_pos_list = [[[(50, 465), (300, 315)],
                      [(50, 465), (120, 55), (360, 320)],
                      [(50, 465), (320, 25), (550, 170), (550, 310)]
                      ]]  # stage1 initiail_pos
-behavior_list = [[[1, 3],
+behavior_list = [[[0, 0],
                   [1, 1, 1],
                   [1, 2, 1, 1, 1],
                   [1, 2, 2],
@@ -100,11 +100,11 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
     # stimulate jump(move up 1 unit)
     def jump(self, jump_step_total, move_step):
         if self.jump_step_total == 0:
-            if self.jump_time == 300:   # jump a time / 300 times loop
+            if self.jump_time == 300:  # jump a time / 300 times loop
                 self.jump_step_total = jump_step_total
         else:
             self.jump_step_total -= move_step
-            self.rect.move_ip(0, -move_step)   # only y axis move
+            self.rect.move_ip(0, -move_step)  # only y axis move
 
     # if enemy isn't on the floor, enemy will fall.
     def gravity(self, move_step, floor):
@@ -152,14 +152,14 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
                 self.b_stop = False
                 self.surf = pygame.transform.scale(self.image_R, (80, 90))
         else:
-            self.stop_time -= 1   # if stop_time == 0, restart to define collide.
+            self.stop_time -= 1  # if stop_time == 0, restart to define collide.
 
         floor = self.get_floor(floor_list)
         player_x = player_rect.centerx
         player_y = player_rect.centery
         move_step = 3
 
-        down_step = 5    # gravity  (move down)
+        down_step = 5  # gravity  (move down)
         jump_step = down_step * 2
 
         self.gravity(down_step, floor)
@@ -205,7 +205,7 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
             if self.jump_time == 0:
                 self.jump_time = 300
             else:
-                self.jump(180 * 2, jump_step)   # *2 because of the gravity
+                self.jump(180 * 2, jump_step)  # *2 because of the gravity
                 self.jump_time -= 1
 
             floor1 = floor_list[0]
@@ -220,6 +220,9 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
                         self.rect.move_ip(-move_step, 0)
             else:
                 self.behavior1(move_step, floor1)
+
+    def is_stop(self):
+        return b_stop
 
     def get_surf(self):
         return self.surf
