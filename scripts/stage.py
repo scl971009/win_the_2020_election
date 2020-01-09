@@ -73,6 +73,7 @@ def action(character, level, window_surface, player, background, material_amount
 					pause(window_surface)
 				elif event.key == K_UP:
 					player.jump()
+			'''
 			elif event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					print(event.pos)
@@ -84,7 +85,7 @@ def action(character, level, window_surface, player, background, material_amount
 						if material_num == material_amount:
 							return True
 						material = Material(character, level, material_num)
-			
+			'''
 		pressed_keys = pygame.key.get_pressed()
 		player.move_left_right(pressed_keys)
 		
