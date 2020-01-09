@@ -183,7 +183,7 @@ class Player(pygame.sprite.Sprite):
 			if self.attack==False:
 				self.yspeed = -15
 			else :
-				self.yspeed =-100
+				self.yspeed =-50
 				self.attack =False
 			self.jumping()
 	def jumping(self):
