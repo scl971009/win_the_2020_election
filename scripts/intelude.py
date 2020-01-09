@@ -8,7 +8,7 @@ title_list = [[["第一關","翻轉高雄"], ["第二關","黑韓產業鏈"],["�
                ["第四關","韓假來了"],["第五關","2020總統大選"]]]
 
 #story_list[character][level][op_ed][line]
-#the last empty string is for awaiting users to click and start
+#the last empty string is for awaiting the user to click and start
 story_list = [[[["2002年，政壇失利；11年後，出任北農總經理……開始嶄露頭角", 
                  "距離1124的縣市首長大選只剩不到百日",
                  "靠著「又老又窮」的一席話、「愛情摩天輪與太平島挖石油」、以及「愛與包容」",
@@ -78,13 +78,21 @@ story_list = [[[["2002年，政壇失利；11年後，出任北農總經理…�
                  "  放眼世界，",
                  "  征服宇宙！」",
                  ""]]]]
-# finel len = 11
+
 
 #define color
 black = (0,0,0)
 white = (255,255,255)
 
 def title_font_create(window_surface,character,level):
+     """
+     create title font of every level in the beginning
+
+     arg
+          window_surface: the window_surface to draw scene
+          character: which character's interlude to show
+          level: which level to show
+     """
      font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 30)        #title format (reusable)
      level_num = font.render(title_list[character][level][0],True, white, black)  #str, True, string_color, str_bg_color #level==0
      level_num_rect = level_num.get_rect()
@@ -97,12 +105,25 @@ def title_font_create(window_surface,character,level):
      window_surface.blit(level_title,level_title_rect)
 
 def intelude_BG(window_surface, file_name_1, file_name_2, file_name_3):
+     """
+     show the corresponding intelude img
+
+     arg
+          window_surface: the window_surface to draw scene
+          file_name_1, file_name_2, file_name_3: the location of img   
+     """
      intelude_bg = pygame.image.load(os.path.join(file_name_1,file_name_2, file_name_3))
      intelude_bg = pygame.transform.scale(intelude_bg, (800, 600))
      intelude_bg = intelude_bg.convert()
      window_surface.blit(intelude_bg, (0, 0))
 
-def click_continue_line(window_surface):                    #remind user to click continue
+def click_continue_line(window_surface):
+     """
+     show the text which remind the user to click and continue
+
+     arg
+          window_surface: the window_surface to draw scene
+     """
      font = pygame.font.Font(os.path.join("story","fonts","msj.ttf"), 19)
      continue_line = font.render("Click anywhere to continue...",True,white,black)
      continue_line_rect = continue_line.get_rect()
@@ -110,7 +131,7 @@ def click_continue_line(window_surface):                    #remind user to clic
      window_surface.blit(continue_line, continue_line_rect)
      
 
-def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV 1), 0 is op / 1 is ed
+def start(window_surface, character, level, op_ed): 
         """
         show the corresponding interlude
 
@@ -209,7 +230,6 @@ def start(window_surface, character, level, op_ed): #basal_bg,character,(0 is LV
                   
                   pygame.display.update()
 
-                  #level 4 requires new codes
                   
              line_pos_2 = 150
              for line in story_list[character][level][op_ed][0:]:
