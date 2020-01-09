@@ -10,16 +10,19 @@ initial_pos_list = [[[(50, 465), (300, 315)],
                      [(50, 465), (120, 55), (360, 320)],
                      [(50, 465), (320, 25), (550, 170), (550, 310)]
                      ]]  # stage1 initiail_pos
-behavior_list = [[[0, 0],
-                  [1, 1, 1],
-                  [1, 2, 1, 1, 1],
-                  [1, 2, 2],
-                  [2, 1, 2, 1]
+behavior_list = [[[3, 2],
+                  [2, 0, 1],
+                  [2, 0, 1, 2, 3],
+                  [1, 2, 4],
+                  [4, 0, 2, 3]
                   ]]
 
 
-# find the floor where the sprite is.
 def get_floor(sprite, floor_list):  # sprite means enemy or player
+    """ Find the floor where the sprite is.
+        arg:
+            sprite: player or enemy
+            floor_list: all blocks and floor  """
     floor_target = Rect(0, 0, 0, 0)
     diff_min = 100000
     for ifloor in floor_list:
@@ -52,9 +55,6 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
 
         self.surf = pygame.transform.scale(self.image_R, (80, 90))  # new_add
 
-        # self.surf = pygame.Surface((60, 90))  # square_test
-        # self.surf.fill((255,0,0))    # red_square
-
         # store the rect position
         self.rect = self.surf.get_rect(topleft=initial_pos_list[character][level][number])
         self.character = character
@@ -69,8 +69,8 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
         self.jump_time = 300
         self.jump_step_total = 0
 
-    # check whether enemy is out of range or not.
     def is_out_of_range(self, move_x, floor):
+        """check whether enemy is out of range or not."""
         if self.rect.left + move_x < floor.left:
             return True
         elif self.rect.right + move_x > floor.right:
@@ -79,6 +79,7 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
         return False
 
     def get_floor(self, floor_list):
+        """Find the floor."""
         floor_target = Rect(0, 0, 0, 0)
         diff_min = 100000
         for ifloor in floor_list:
@@ -90,15 +91,16 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
 
         return floor_target
 
-    # check if player and enemy are on the same floor.
     def is_play_in_same_floor(self, floor_list, player):
-        if get_floor(self, floor_list) == get_floor(player, floor_list):
-            return True
-        else:
-            return False
+        """check if player and enemy are on the same floor."""
+        return True
+        # if get_floor(self, floor_list) == get_floor(player, floor_list):
+        #     return True
+        # else:
+        #     return False
 
-    # stimulate jump(move up 1 unit)
     def jump(self, jump_step_total, move_step):
+        """stimulate jump(move up 1 unit)"""
         if self.jump_step_total == 0:
             if self.jump_time == 300:  # jump a time / 300 times loop
                 self.jump_step_total = jump_step_total
@@ -106,16 +108,16 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
             self.jump_step_total -= move_step
             self.rect.move_ip(0, -move_step)  # only y axis move
 
-    # if enemy isn't on the floor, enemy will fall.
     def gravity(self, move_step, floor):
+        """if enemy isn't on the floor, enemy will fall."""
         if self.rect.bottom + move_step < floor.top:
             self.rect.move_ip(0, move_step)
         else:
             dist = floor.top - self.rect.bottom
             self.rect.move_ip(0, dist)
 
-    # behavior1 = move from left to right or upside down.
     def behavior1(self, move_step, floor):
+        """behavior1 = move from left to right or upside down."""
         if self.b_move_right:
             if self.is_out_of_range(move_step, floor):
                 # dist = floor.right - self.rect.right
@@ -157,7 +159,7 @@ class Enemy(pygame.sprite.Sprite):  # enemy is a kind of sprite.
         floor = self.get_floor(floor_list)
         player_x = player_rect.centerx
         player_y = player_rect.centery
-        move_step = 3
+        move_step = 2
 
         down_step = 5  # gravity  (move down)
         jump_step = down_step * 2

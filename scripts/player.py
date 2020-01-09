@@ -123,6 +123,7 @@ class Player(pygame.sprite.Sprite):
 
 
 		for enemy in enemy_group:
+			enemy.b_stop
 			if 20>abs(self.rect.bottom-enemy.rect.top)>10 and pygame.Rect.colliderect(self.rect, enemy) :
 					self.attack=True
 					self.jump()
